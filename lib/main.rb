@@ -1,6 +1,7 @@
 
 require_relative 'tablero.rb'
 require_relative 'sorpresa.rb'
+require_relative 'casilla.rb'
 require_relative 'mazo_sorpresas.rb'
 
 module Civitas
@@ -29,18 +30,40 @@ module Civitas
 		DESPUES_GESTIONAR = :despues_gestionar
   end
   
-  mazo       = Civitas::MazoSorpresas.new
-  sorpresa_1 = Civitas::Sorpresa.new("a")
-  sorpresa_2 = Civitas::Sorpresa.new("b")
-  sorpresa_3 = Civitas::Sorpresa.new("c")
-  sorpresa_4 = Civitas::Sorpresa.new("d")
-  sorpresa_5 = Civitas::Sorpresa.new("e")
+  # Funcionamiento de la clase MazoSorpresas
+  mazo       = MazoSorpresas.new
+  sorpresa_1 = Sorpresa.new("Sorpresa 1")
+  sorpresa_2 = Sorpresa.new("Sorpresa 2")
+
   mazo.al_mazo(sorpresa_1)
   mazo.al_mazo(sorpresa_2)
-  mazo.al_mazo(sorpresa_3)
-  mazo.al_mazo(sorpresa_4)
-  mazo.al_mazo(sorpresa_5)
+
   sorpresa = mazo.siguiente
-  puts sorpresa.nombre
+
+  mazo.inhabilitar_carta_especial(sorpresa_2)
+  mazo.habilitar_carta_especial(sorpresa_2)
+
+
+  diario = Diario.instance
+  while diario.eventos_pendientes
+    puts diario.leer_evento    
+  end
   
+  tablero = Tablero.new(3)
+  tablero.añade_juez()
+
+  casilla1 = Casilla.new("Primera")
+  casilla2 = Casilla.new("Segunda")
+  casilla3 = Casilla.new("Tercera")
+  casilla4 = Casilla.new("Cuarta")
+
+  tablero.añade_casilla(casilla1)
+  tablero.añade_casilla(casilla2)
+  tablero.añade_casilla(casilla3)
+  tablero.añade_casilla(casilla4)
+
+  for i in (0..6) do
+    casilla = tablero.casilla(i)
+    puts casilla.nombre
+  end
 end
