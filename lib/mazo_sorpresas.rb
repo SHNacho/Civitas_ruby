@@ -14,7 +14,10 @@ module Civitas
     def initialize(_debug = false)
       self.init
       @debug = _debug
-      Civitas::Diario.instance.ocurre_evento("Modo debug activado")        
+      if @debug
+        Civitas::Diario.instance.ocurre_evento("Modo debug activado")
+      end
+              
     end
     
     def al_mazo(s)

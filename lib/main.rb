@@ -66,7 +66,7 @@ module Civitas
   tablero.añade_casilla(casilla4)
 
   for i in (0..6) do
-    casilla = tablero.get_casilla(i)
+    casilla = tablero.casilla(i)
     puts casilla.nombre
   end
   
