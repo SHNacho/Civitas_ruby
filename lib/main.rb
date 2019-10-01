@@ -32,49 +32,6 @@ module Civitas
 		DESPUES_GESTIONAR = :despues_gestionar
   end
   
-  # Funcionamiento de la clase MazoSorpresas
-  mazo       = MazoSorpresas.new
-  sorpresa_1 = Sorpresa.new("Sorpresa 1")
-  sorpresa_2 = Sorpresa.new("Sorpresa 2")
-
-  mazo.al_mazo(sorpresa_1)
-  mazo.al_mazo(sorpresa_2)
-
-  sorpresa = mazo.siguiente
-
-  mazo.inhabilitar_carta_especial(sorpresa_2)
-  mazo.habilitar_carta_especial(sorpresa_2)
-
-
-  diario = Diario.instance
-  while diario.eventos_pendientes
-    puts diario.leer_evento    
-  end
-  
-  tablero = Tablero.new(3)
-  tablero.añade_juez()
-
-  casilla = Casilla.new("cas")
-  casilla1 = Casilla.new("Primera")
-  casilla2 = Casilla.new("Segunda")
-  casilla3 = Casilla.new("Tercera")
-  casilla4 = Casilla.new("Cuarta")
-
-  tablero.añade_casilla(casilla1)
-  tablero.añade_casilla(casilla2)
-  tablero.añade_casilla(casilla3)
-  tablero.añade_casilla(casilla4)
-
-  for i in (0..6) do
-    casilla = tablero.casilla(i)
-    puts casilla.nombre
-  end
-  
-    diario = Diario.instance
-  while diario.eventos_pendientes
-    puts diario.leer_evento    
-  end
-  
   # A continuación vamos a llamar 100 veces al método quien empieza
   
   n =4          #Número de participantes
@@ -165,5 +122,54 @@ module Civitas
   puts (TipoSorpresa::IRCARCEL)
   
   puts(Estados_juego::INICIO_TURNO)
+
+  # Funcionamiento de la clase MazoSorpresas
+  mazo       = MazoSorpresas.new
+  sorpresa_1 = Sorpresa.new("Sorpresa 1")
+  sorpresa_2 = Sorpresa.new("Sorpresa 2")
+
+  mazo.al_mazo(sorpresa_1)
+  mazo.al_mazo(sorpresa_2)
+
+  sorpresa = mazo.siguiente
+
+  mazo.inhabilitar_carta_especial(sorpresa_2)
+  mazo.habilitar_carta_especial(sorpresa_2)
+
+
+  diario = Diario.instance
+  while diario.eventos_pendientes
+    puts diario.leer_evento    
+  end
+  
+  #Funcionamiento de la clase tablero
+  tablero = Tablero.new(3)
+  tablero.añade_juez()
+
+  casilla = Casilla.new("cas")
+  casilla1 = Casilla.new("Primera")
+  casilla2 = Casilla.new("Segunda")
+  casilla3 = Casilla.new("Tercera")
+  casilla4 = Casilla.new("Cuarta")
+
+  tablero.añade_casilla(casilla1)
+  tablero.añade_casilla(casilla2)
+  tablero.añade_casilla(casilla3)
+  tablero.añade_casilla(casilla4)
+
+  for i in (0..6) do
+    casilla = tablero.casilla(i)
+    puts casilla.nombre
+  end
+
+  #TODO varias tiradas de dado y calcular la posición final
+  pos_actual = 0
+  puts "Estamos en la casilla " + pos_actual.to_s
+  for i in (0..3) do
+    tirada = dado.tirar
+    puts "Ha salido un " + tirada.to_s
+    pos_actual = tablero.nueva_posicion(pos_actual, tirada)
+    puts "Avanzo a la casilla " + pos_actual.to_s
+  end
 
 end
