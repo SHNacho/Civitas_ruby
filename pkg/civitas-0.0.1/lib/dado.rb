@@ -2,39 +2,37 @@
 # To change this template file, choose Tools | Templates
 # and open the template in the editor.
 
-require 'random'
-
 require 'singleton'
+require './diario.rb'
 
 module Civitas
   class Dado
-    include Random
     include Singleton
     
     @@SalidaCarcel = 5
     
     def initialize
       @random = Random.new()
-      @ultimoResultado = 0
+      @ultimo_resultado = 0
       @debug = false
     end
     
     def tirar 
-      @ultimoResultado = 1
+      @ultimo_resultado = 1
       
       if @debug == false
-        @ultimoResultado = @random.rand(1..6)
+        @ultimo_resultado = @random.rand(1..6)
       end
       
-      return @ultimoResultado
+      return @ultimo_resultado
     end
     
-    def salgo_de_la_carcel (n)
+    def salgo_de_la_carcel ()
       tirar
       
       puede = false
       
-      if @ultimoResultado == @@SalidaCarcel
+      if @ultimo_resultado == @@SalidaCarcel
         puede = true
       end
       
@@ -62,7 +60,7 @@ module Civitas
     end
     
     def leer_ultimo_resultado
-      return @ultimoResultado
+      return @ultimo_resultado
     end
- end
+  end
 end
