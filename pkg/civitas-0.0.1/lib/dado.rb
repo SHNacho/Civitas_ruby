@@ -3,7 +3,7 @@
 # and open the template in the editor.
 
 require 'singleton'
-require './diario.rb'
+require_relative 'diario.rb'
 
 module Civitas
   class Dado
