@@ -5,8 +5,8 @@ module Civitas
     
         attr_reader :nombre
         
-        def initialize (_nombre)
-          @nombre = _nombre
+        def initialize (nombre)
+          @nombre = nombre
         end
       end
 end

@@ -7,12 +7,12 @@ module Civitas
         @cartas_especiales = []
         @barajada = false
         @usadas = 0
-        @ultima_sorpresa
     end
     
     
     def initialize(_debug = false)
       self.init
+      @ultima_sorpresa = nil
       @debug = _debug
       if @debug
         Civitas::Diario.instance.ocurre_evento("Modo debug activado")
