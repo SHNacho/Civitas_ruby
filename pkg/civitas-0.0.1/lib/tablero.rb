@@ -1,15 +1,6 @@
 # encoding:utf-8
 
-module Civitas
-  class Casilla #Clase temporal
-    
-    attr_reader :nombre
-    
-    def initialize (_nombre)
-      @nombre = _nombre
-    end
-  end
-  
+module Civitas  
   class Tablero
     
     attr_reader :num_casilla_carcel
@@ -68,7 +59,7 @@ module Civitas
       end
     end
     
-    def get_casilla(num_casilla)
+    def casilla(num_casilla)
       casilla = nil
       if num_casilla < @casillas.size
         casilla = @casillas[num_casilla]

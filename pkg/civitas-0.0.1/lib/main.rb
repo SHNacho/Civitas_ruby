@@ -1,7 +1,10 @@
+# encoding:UTF-8
 
 require_relative 'tablero.rb'
 require_relative 'sorpresa.rb'
+require_relative 'casilla.rb'
 require_relative 'mazo_sorpresas.rb'
+require_relative 'dado.rb'
 
 module Civitas
   module TipoCasilla
@@ -29,20 +32,138 @@ module Civitas
 		DESPUES_GESTIONAR = :despues_gestionar
   end
   
-  mazo       = Civitas::MazoSorpresas.new
-  sorpresa_1 = Civitas::Sorpresa.new("a")
-  sorpresa_2 = Civitas::Sorpresa.new("b")
-  sorpresa_3 = Civitas::Sorpresa.new("c")
-  sorpresa_4 = Civitas::Sorpresa.new("d")
-  sorpresa_5 = Civitas::Sorpresa.new("e")
+  # Funcionamiento de la clase MazoSorpresas
+  mazo       = MazoSorpresas.new
+  sorpresa_1 = Sorpresa.new("Sorpresa 1")
+  sorpresa_2 = Sorpresa.new("Sorpresa 2")
+
   mazo.al_mazo(sorpresa_1)
   mazo.al_mazo(sorpresa_2)
-  mazo.al_mazo(sorpresa_3)
-  mazo.al_mazo(sorpresa_4)
-  mazo.al_mazo(sorpresa_5)
-  sorpresa = mazo.siguiente
-  puts sorpresa.nombre
-  
 
+  sorpresa = mazo.siguiente
+
+  mazo.inhabilitar_carta_especial(sorpresa_2)
+  mazo.habilitar_carta_especial(sorpresa_2)
+
+
+  diario = Diario.instance
+  while diario.eventos_pendientes
+    puts diario.leer_evento    
+  end
   
+  tablero = Tablero.new(3)
+  tablero.añade_juez()
+
+  casilla = Casilla.new("cas")
+  casilla1 = Casilla.new("Primera")
+  casilla2 = Casilla.new("Segunda")
+  casilla3 = Casilla.new("Tercera")
+  casilla4 = Casilla.new("Cuarta")
+
+  tablero.añade_casilla(casilla1)
+  tablero.añade_casilla(casilla2)
+  tablero.añade_casilla(casilla3)
+  tablero.añade_casilla(casilla4)
+
+  for i in (0..6) do
+    casilla = tablero.casilla(i)
+    puts casilla.nombre
+  end
+  
+    diario = Diario.instance
+  while diario.eventos_pendientes
+    puts diario.leer_evento    
+  end
+  
+  # A continuación vamos a llamar 100 veces al método quien empieza
+  
+  n =4          #Número de participantes
+  
+  p1 = 0        #Contador para saber cuantas veces aparece cada participante
+  p2 = 0
+  p3 = 0
+  p4 = 0
+  
+  k = 0
+  
+  dado = Dado.instance
+  
+  for i in 1..100 do
+    k = dado.quien_empieza(n)
+    puts k
+    
+    case k 
+    when k = 0
+      p1+=1
+    when k = 1
+      p2+=1
+    when k = 2
+      p3+=1
+    when k = 3
+      p4+=1
+    end
+  end
+  
+  puts ("Participante 1")
+  puts p1
+  
+  puts ("Participante 2")
+  puts p2
+  
+  puts ("Participante 3")
+  puts p3
+  
+  puts ("Participante 4")
+  puts p4
+  
+  # Comprobamos que funciona el método debug
+  
+  puts("Comprobamos el metodo debug")
+   
+  d = true
+  
+  puts("Para debug=true, se dan las siguientes tiradas:")
+  
+  dado.set_debug(d)
+  
+  for j in 1..5 do
+    puts(dado.tirar())
+  end
+  
+  d = false
+  
+  puts("Para debug=false, se dan las siguientes tiradas:")
+  
+  dado.set_debug(d)
+  
+  for m in 1..5 do
+    puts(dado.tirar())
+  end
+  
+  # Comprobamos que funciona getUltimoResultado() y salgoDeLaCarcel()
+        
+  puts("Comprobamos el metodo getUltimoResultado")
+        
+  puts(dado.leer_ultimo_resultado)
+        
+  # Podemos observar que devuelve el último valor de la tirada
+        
+  lol = true;
+        
+  lol = dado.salgo_de_la_carcel();
+        
+  if lol == true
+    puts("salgo de la carcel")
+  else
+    puts("no salgo de la carcel")
+  end
+  
+  # Mostramos un valor al menos de cada uno de los enumerados
+  
+  puts (TipoCasilla::CALLE)
+  
+  puts (TipoSorpresa::IRCARCEL)
+  
+  puts(Estados_juego::INICIO_TURNO)
+
 end
