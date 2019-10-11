@@ -16,19 +16,9 @@ module Civitas
       @por_salida = 0
       @tiene_juez = false
     end
-    
-    private
-    def correcto()
-      return (@casillas.size > num_casilla_carcel) && @tiene_juez
-    end
-    
-    def correcto(num_casilla)
-      es_correcto = false
-      if self.correcto && (num_casilla < @casillas.size)
-        es_correcto = true
-      end
-      
-      return es_correcto
+        
+    def correcto(num_casilla = 0)      
+      return ((@casillas.size > @num_casilla_carcel) && @tiene_juez) && (num_casilla < @casillas.size)
     end
     
     public
@@ -61,7 +51,7 @@ module Civitas
     
     def casilla(num_casilla)
       casilla = nil
-      if num_casilla < @casillas.size
+      if correcto(num_casilla)
         casilla = @casillas[num_casilla]
       end
       return casilla
@@ -87,7 +77,7 @@ module Civitas
       return tirada
     end
    
-    
+    private :correcto
   end
   
 end

@@ -31,6 +31,14 @@ module Civitas
 		DESPUES_COMPRAR   = :despues_comprar
 		DESPUES_GESTIONAR = :despues_gestionar
   end
+
+  module Operaciones_juego
+    PASAR_TURNO = :pasar_turno
+    SALIR_CARCEL = :salir_carcel
+    AVANZAR = :avanzar 
+    COMPRAR = :comprar
+    GESTIONAR = :gestionar
+  end
   
   # A continuación vamos a llamar 100 veces al método quien empieza
   
@@ -171,5 +179,7 @@ module Civitas
     pos_actual = tablero.nueva_posicion(pos_actual, tirada)
     puts "Avanzo a la casilla " + pos_actual.to_s
   end
+
+  
 
 end
