@@ -33,7 +33,7 @@ module Civitas
                 puts "EL RANKING ES EL SIGUIENTE: "
 
                 for jugador in rank
-                    puts (jugador.nombre + " con un saldo de: " jugador.saldo)
+                    puts (jugador.nombre + " con un saldo de: " +jugador.saldo)
                 end
             end
         end
