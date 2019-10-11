@@ -27,7 +27,7 @@ module Civitas
       return @ultimo_resultado
     end
     
-    def salgo_de_la_carcel ()
+    def salgo_de_la_carcel
       tirar
       
       puede = false

@@ -68,13 +68,11 @@ module Civitas
     end
     
     def nueva_posicion(actual, tirada)
-      posicion = actual
-      modulo = actual % @casillas.size
-      if (modulo) < tirada
-        posicion = tirada - modulo
-        por_salida += 1
-      else
-        posicion += tirada
+      posicion = actual + tirada
+      ultima_casilla = @casillas.size-1
+      if posicion > ultima_casilla
+        posicion = posicion % ultima_casilla
+        @por_salida += 1
       end
       
       return posicion
