@@ -1,4 +1,5 @@
 require_relative 'diario.rb'
+require_relative 'sorpresa.rb'
 
 module Civitas
   class MazoSorpresas
@@ -10,10 +11,10 @@ module Civitas
     end
     
     
-    def initialize(_debug = false)
+    def initialize(debug = false)
       self.init
       @ultima_sorpresa = nil
-      @debug = _debug
+      @debug = debug
       if @debug
         Civitas::Diario.instance.ocurre_evento("Modo debug activado")
       end

@@ -1,9 +1,9 @@
-require_relative 'diario'
-require_relative 'operaciones_juego'
+require_relative 'diario.rb'
+require_relative 'enum.rb'
 
 module Civitas
   class Gestor_estados
-
+    
     def estado_inicial
       return (Estados_juego::INICIO_TURNO)
     end

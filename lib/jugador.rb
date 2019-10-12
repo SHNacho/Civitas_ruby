@@ -15,16 +15,10 @@ module Civitas
     @@precio_libertad = 200
     @@saldo_inicial = 7500
     
-    private attr_reader :casas_max
+    
     attr_reader :casas_por_hotel
-    private attr_reader :hoteles_max
-    protected attr_reader :nombre
     attr_reader :num_casilla_actual
-    private attr_reader :precio_libertad
-    private attr_reader :paso_por_salida
-    protected attr_reader :propiedades
     attr_reader :puede_comprar
-    protected attr_reader :saldo
     attr_reader :encarcelado
     
     
@@ -250,6 +244,11 @@ module Civitas
     end
     
     private
+
+    attr_reader :casas_max
+    attr_reader :hoteles_max
+    attr_reader :precio_libertad
+    attr_reader :paso_por_salida
     
     def debe_ser_encarcelado
       debe_serlo = false
@@ -326,5 +325,11 @@ module Civitas
       
       return puedo
     end
+
+    protected
+    attr_reader :nombre
+    attr_reader :propiedades
+    attr_reader :saldo
+
   end
 end

@@ -1,5 +1,7 @@
 #enconding:UTF-8
 
+require_relative 'enum.rb'
+
 module Civitas
     class Casilla
       
@@ -43,9 +45,9 @@ module Civitas
       
       public
       
-      def recibe_jugador (i_actual, todos)
+      # def recibe_jugador (i_actual, todos)
         
-      end
+      # end
       
       def jugador_correcto (i_actual, todos)
         correcto = false
@@ -80,9 +82,9 @@ module Civitas
         Diario.instance.ocurre_evento(evento)
       end
       
-      def recibe_jugador_calle (i_actual, todos)
+      # def recibe_jugador_calle (i_actual, todos)
         
-      end
+      # end
       
       def recibe_jugador_impuesto (i_actual, todos)
         if jugador_correcto(i_actual, todos)
@@ -98,8 +100,8 @@ module Civitas
         end
       end
       
-      def recibe_jugador_sorpresa (i_actual, todos)
+      # def recibe_jugador_sorpresa (i_actual, todos)
         
-      end
+      # end
   end
 end

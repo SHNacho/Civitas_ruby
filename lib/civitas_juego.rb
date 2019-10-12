@@ -1,5 +1,13 @@
 # encoding:utf-8
 
+require_relative 'jugador.rb'
+require_relative 'gestor_estados.rb'
+require_relative 'mazo_sorpresas.rb'
+require_relative 'tablero.rb'
+require_relative 'casilla.rb'
+require_relative 'sorpresa.rb'
+require_relative 'dado.rb'
+
 module Civitas
     class CivitasJuego
         
@@ -8,7 +16,8 @@ module Civitas
             @jugadores = []
             if(nombres.size()<=4)
                 for nombre in nombres
-                    @jugadores << Jugador.new(nombre)
+                    jugador = Jugador.new(nombre)
+                    @jugadores << jugador
                 end
             end
 
@@ -17,8 +26,8 @@ module Civitas
             @indice_jugador_actual = Dado.instance.quien_empieza(@jugadores.size)
             @estado = nil
             @mazo = MazoSorpresas.new
+            inicializar_mazo_sorpresas(@tablero)
             inicializar_tablero(@mazo)
-            inicializar_mazo(@tablero)
         end
 
         def actualizar_info
