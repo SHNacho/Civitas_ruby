@@ -208,7 +208,7 @@ module Civitas
 
         if !@encarcelado 
             if existe_la_propiedad(ip)
-                if @propiedades[ip].vender(this)
+                if @propiedades[ip].vender(self)
                     puede_vender = true
                     @propiedades.delete_at(ip)
                     evento = "El jugador " + @nombre 
