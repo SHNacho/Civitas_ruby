@@ -8,7 +8,7 @@ module Civitas
 
     @@factor_intereses_hipoteca = 1.1
     
-    private attr_reader :hipoteca_base
+    
     
     attr_reader :propietario
     
@@ -185,6 +185,8 @@ module Civitas
     end
 
     private
+
+    attr_reader :hipoteca_base
 
     def es_este_el_propietario (jugador)
       lo_es = false

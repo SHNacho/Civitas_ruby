@@ -48,7 +48,7 @@ module Civitas
         end
 
         def final_del_juego
-            boolean bancarrota = false
+            bancarrota = false
 
             for jugador in @jugadores
                 if jugador.en_bancarrota
@@ -121,8 +121,38 @@ module Civitas
         end
 
         def ranking 
-            @jugadores.sort
+            @jugadores.sort!.reverse!
             return @jugadores
+        end
+
+        public
+
+        def main
+            @jugadores[0].modificar_saldo(200)
+            @jugadores[1].modificar_saldo(300)
+            @jugadores[2].modificar_saldo(600)
+            @jugadores[3].modificar_saldo(100)
+
+            ranking
+
+            for jugador in @jugadores
+                puts jugador.nombre
+            end
+
+            if final_del_juego
+                puts "El juego ha terminado"
+            end
+
+            puts get_casilla_actual.nombre
+
+            @jugadores[2].encarcelar(4)
+            if @jugadores[2].salir_carcel_pagando
+                puts "Ha salido pagando"
+            end
+            @jugadores[3].encarcelar(4)
+            if @jugadores[3].salir_carcel_tirando
+                puts "Ha salido tirando"
+            end
         end
 
     end

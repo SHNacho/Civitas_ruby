@@ -2,17 +2,13 @@ require_relative 'diario.rb'
 require_relative 'sorpresa.rb'
 
 module Civitas
-  class MazoSorpresas
-    def init
-        @sorpresas = []
-        @cartas_especiales = []
-        @barajada = false
-        @usadas = 0
-    end
-    
+  class MazoSorpresas    
     
     def initialize(debug = false)
-      self.init
+      @sorpresas = []
+      @cartas_especiales = []
+      @barajada = false
+      @usadas = 0
       @ultima_sorpresa = nil
       @debug = debug
       if @debug
