@@ -1,4 +1,5 @@
 require_relative 'enum.rb'
+require_relative 'diario.rb'
 module Civitas
   class Sorpresa
 
@@ -51,7 +52,27 @@ module Civitas
       diario = Diario.instance 
       if (jugador_correcto(actual, todos))
         str = "Se aplica Sorpresa a " + todos[actual].nombre
-        diario.ocure_evento(str)
+        diario.ocurre_evento(str)
+      end
+    end
+    
+    def aplicar_a_jugador(actual, todos)
+      if jugador_correcto(actual, todos)
+        case @tipo
+        when TipoSorpresa::IRCARCEL
+          aplicar_a_jugador_ir_carcel(actual, todos)
+        when TipoSorpresa::IRCASILLA
+          aplicar_a_jugador_ir_a_casilla(actual, todos)
+        when TipoSorpresa::PAGARCOBRAR
+          aplicar_jugador_pagar_cobrar(actual, todos)
+        when TipoSorpresa::PORCASAHOTEL
+          aplicar_jugador_por_casa_hotel(actual, todos)
+        when TipoSorpresa::PORJUGADOR
+          aplicar_a_jugador_por_jugador(actual, todos)
+        when TipoSorpresa::SALIRCARCEL
+          apliar_a_jugador_salir_carcel(actual, todos)
+        end
+        
       end
     end
 
@@ -122,34 +143,14 @@ module Civitas
     def aplicar_a_jugador_ir_a_casilla(actual, todos)
       if jugador_correcto(actual, todos)
         informe(actual, todos)
-        casilla_actual = todos[actual].numCasillaActual
+        casilla_actual = todos[actual].num_casilla_actual
 
         tirada = @tablero.calcular_tirada(casilla_actual, @valor)
         nuevaPos = @tablero.nueva_posicion(actual, tirada)
 
         todos[actual].mover_a_casilla(nuevaPos)
-        casilla = @tablero.get_casilla(@valor)
-        casilla.recibe_jugador(actual, todos)
-      end
-    end
-
-    def aplicar_a_jugador(actual, todos)
-      if jugador_correcto(actual, todos)
-        case @tipo
-        when TipoSorpresa::IRCARCEL
-          aplicar_a_jugador_ir_carcel(actual, todos)
-        when TipoSorpresa::IRCASILLA
-          aplicar_a_jugador_ir_a_casilla(actual, todos)
-        when TipoSorpresa::PAGARCOBRAR
-          aplicar_jugador_pagar_cobrar(actual, todos)
-        when TipoSorpresa::PORCASAHOTEL
-          aplicar_jugador_por_casa_hotel(actual, todos)
-        when TipoSorpresa::PORJUGADOR
-          aplicar_a_jugador_por_jugador(actual, todos)
-        when TipoSorpresa::SALIRCARCEL
-          apliar_a_jugador_salir_carcel(actual, todos)
-        end
-        
+        casilla = @tablero.casilla(@valor)
+       # casilla.recibe_jugador(actual, todos)
       end
     end
     private_class_method :new

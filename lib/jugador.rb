@@ -26,7 +26,7 @@ module Civitas
         @num_casilla_actual = 0
         @puede_comprar = true
         @saldo = @@saldo_inicial
-        @salvo_conducto = nil
+        @salvoconducto = nil
         @propiedades = []
       else
         @nombre = otro.nombre
@@ -34,7 +34,7 @@ module Civitas
         @num_casilla_actual = otro.num_casilla_actual
         @puede_comprar = otro.puede_comprar
         @saldo = otro.saldo
-        @salvo_conducto = otro.salvo_conducto
+        @salvoconducto = otro.salvoconducto
         @propiedades = otro.propiedades
       end
     end
@@ -115,11 +115,11 @@ module Civitas
       return puede_mover
     end
     
-    def obtener_salvo_conducto (sorpresa)
+    def obtener_salvoconducto (sorpresa)
       puede = false
       
       if !@encarcelado
-        @salvo_conducto = sorpresa
+        @salvoconducto = sorpresa
         puede = true
       end
       
@@ -197,7 +197,7 @@ module Civitas
     end
     
     def tiene_salvo_conducto
-      return @salvo_conducto != nil
+      return @salvoconducto != nil
     end
     
     def vender (ip)
@@ -225,7 +225,7 @@ module Civitas
     
     def to_string
         encarcelado_str = @encarcelado ? "Sí" : "No"
-        salvoconducto_str = (@salvo_conducto == nil) ? "No" : "Sí"
+        salvoconducto_str = (@salvoconducto == nil) ? "No" : "Sí"
         propiedades_str = (@propiedades.size).to_s
         puede_comprar_str = @puede_comprar ? "Sí" : "No"
         str =       "JUGADOR \n" +
@@ -255,7 +255,7 @@ module Civitas
           debe_serlo=true
         else
           debe_serlo = false
-          perder_salvo_conducto
+          perder_salvoconducto
         end
       end
       
@@ -272,9 +272,9 @@ module Civitas
       return existe
     end
     
-    def perder_salvo_conducto
-      @salvo_conducto.usada
-      @salvo_conducto = nil
+    def perder_salvoconducto
+      @salvoconducto.usada
+      @salvoconducto = nil
     end
     
     def puede_salir_carcel_pagando

@@ -7,6 +7,7 @@ require_relative 'tablero.rb'
 require_relative 'casilla.rb'
 require_relative 'sorpresa.rb'
 require_relative 'dado.rb'
+require_relative 'diario.rb'
 
 module Civitas
     class CivitasJuego
