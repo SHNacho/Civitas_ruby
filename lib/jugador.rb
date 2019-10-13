@@ -328,11 +328,10 @@ module Civitas
 
     protected
     attr_reader :propiedades
-    
-
-    public
     attr_reader :saldo
     attr_reader :nombre
+
+    public
 
     def main
       mazo = MazoSorpresas.new
