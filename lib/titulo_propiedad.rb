@@ -1,6 +1,4 @@
-# To change this license header, choose License Headers in Project Properties.
-# To change this template file, choose Tools | Templates
-# and open the template in the editor.
+#encoding:utf-8
 
 module Civitas
 
@@ -8,7 +6,7 @@ module Civitas
 
     @@factor_intereses_hipoteca = 1.1
     
-    private attr_reader :hipoteca_base
+    
     
     attr_reader :propietario
     
@@ -185,6 +183,8 @@ module Civitas
     end
 
     private
+
+    attr_reader :hipoteca_base
 
     def es_este_el_propietario (jugador)
       lo_es = false

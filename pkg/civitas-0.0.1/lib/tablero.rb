@@ -1,5 +1,7 @@
 # encoding:utf-8
 
+require_relative 'casilla.rb'
+
 module Civitas  
   class Tablero
     
@@ -12,23 +14,13 @@ module Civitas
         @num_casilla_carcel = 1
       end
       @casillas = []
-      @casillas[0] = Casilla.new("Salida")
+      @casillas[0] = Casilla.new_descanso("Salida")
       @por_salida = 0
       @tiene_juez = false
     end
-    
-    private
-    def correcto()
-      return (@casillas.size > num_casilla_carcel) && @tiene_juez
-    end
-    
-    def correcto(num_casilla)
-      es_correcto = false
-      if self.correcto && (num_casilla < @casillas.size)
-        es_correcto = true
-      end
-      
-      return es_correcto
+        
+    def correcto(num_casilla = 0)      
+      return ((@casillas.size > @num_casilla_carcel) && @tiene_juez) && (num_casilla < @casillas.size)
     end
     
     public
@@ -44,24 +36,24 @@ module Civitas
     
     def añade_casilla(casilla) 
       if @casillas.size == @num_casilla_carcel
-        @casillas.push(Casilla.new("Cárcel"))
+        @casillas.push(Casilla.new_descanso("Cárcel"))
       end
       @casillas.push(casilla)
       if @casillas.size == @num_casilla_carcel
-        @casillas.push(Casilla.new("Cárcel"))
+        @casillas.push(Casilla.new_descanso("Cárcel"))
       end
     end
     
     def añade_juez
       if !@tiene_juez
-        self.añade_casilla(Casilla.new("Juez"))
+        self.añade_casilla(Casilla.new_juez(@num_casilla_carcel ,"Juez"))
         @tiene_juez = true
       end
     end
     
     def casilla(num_casilla)
       casilla = nil
-      if num_casilla < @casillas.size
+      if correcto(num_casilla)
         casilla = @casillas[num_casilla]
       end
       return casilla
@@ -87,7 +79,7 @@ module Civitas
       return tirada
     end
    
-    
+    private :correcto
   end
   
 end

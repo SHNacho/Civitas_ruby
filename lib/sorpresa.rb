@@ -114,7 +114,7 @@ module Civitas
 
     def aplicar_a_jugador_ir_carcel(actual, todos)
       if jugador_correcto(actual, todos)
-        casilla = tablero.carcel
+        casilla = @tablero.carcel
         todos[actual].encarcelar(casilla)
       end
     end
@@ -124,11 +124,11 @@ module Civitas
         informe(actual, todos)
         casilla_actual = todos[actual].numCasillaActual
 
-        tirada = tablero.calcular_tirada(casilla_actual, valor)
-        nuevaPos = tablero.nueva_posicion(actual, tirada)
+        tirada = @tablero.calcular_tirada(casilla_actual, @valor)
+        nuevaPos = @tablero.nueva_posicion(actual, tirada)
 
         todos[actual].mover_a_casilla(nuevaPos)
-        casilla = tablero.get_casilla(@valor)
+        casilla = @tablero.get_casilla(@valor)
         casilla.recibe_jugador(actual, todos)
       end
     end

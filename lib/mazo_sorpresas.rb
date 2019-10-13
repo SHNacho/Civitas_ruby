@@ -2,7 +2,8 @@ require_relative 'diario.rb'
 require_relative 'sorpresa.rb'
 
 module Civitas
-  class MazoSorpresas      
+  class MazoSorpresas    
+    
     def initialize(debug = false)
       @sorpresas = []
       @cartas_especiales = []

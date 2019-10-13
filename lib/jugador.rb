@@ -1,7 +1,4 @@
-# To change this license header, choose License Headers in Project Properties.
-# To change this template file, choose Tools | Templates
-# and open the template in the editor.
-
+#encoding:utf-8
 
 module Civitas
   class Jugador
@@ -96,7 +93,7 @@ module Civitas
     def modificar_saldo (cantidad)
       @saldo += cantidad
       
-      evento = "El saldo del jugador " + @nombre + " ha aumentado en " + cantidad
+      evento = "El saldo del jugador " + @nombre + " ha aumentado en " + cantidad.to_s
       
       Diario.instance.ocurre_evento(evento)
       
@@ -110,7 +107,7 @@ module Civitas
         @num_casilla_actual = num_casilla
         @puede_comprar = false
         evento = "El jugador " + @nombre + " se ha movido a la casilla numero "+ 
-                  num_casilla
+                  num_casilla.to_s
                 Diario.instance.ocurre_evento(evento)
         puede_mover = true
       end
@@ -150,7 +147,7 @@ module Civitas
     end
     
     def pasa_por_salida
-      modificar_saldo(@paso_por_salida)
+      modificar_saldo(@@paso_por_salida)
       Diario.instance.ocurre_evento("El jugador " + @nombre +" ha pasado por salida")
       
       return true
@@ -176,8 +173,8 @@ module Civitas
     
     def salir_carcel_pagando
        sale = false;
-        if @encarcelado && puedo_salir_carcel_pagando
-            paga(@precio_libertad)
+        if @encarcelado && puede_salir_carcel_pagando
+            paga(@@precio_libertad)
             sale = true
             @encarcelado = false
             Diario.instance.ocurre_evento("Jugador " + @nombre + " ha salido de la carcel")
@@ -327,9 +324,12 @@ module Civitas
     end
 
     protected
-    attr_reader :nombre
+    
     attr_reader :propiedades
     attr_reader :saldo
+    
+    public
+    attr_reader :nombre
 
   end
 end

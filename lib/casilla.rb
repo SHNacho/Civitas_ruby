@@ -8,7 +8,6 @@ module Civitas
       @@carcel = 0
       
       attr_reader :titulo_propiedad
-      
       attr_reader :nombre
     
       def initialize (nombre, titulo, cantidad, num_casilla_carcel, mazo, tipo, sorpresa)
@@ -22,15 +21,15 @@ module Civitas
       end
       
       def self.new_descanso(nombre)
-        new(nombre, nil, nil, 0, nil, TipoCasilla::DESCANSO, nil)
+        new(nombre, nil, nil, @@carcel, nil, TipoCasilla::DESCANSO, nil)
       end
       
       def self.new_calle (titulo)   #calle
-        new(titulo.nombre, titulo, nil, 0, nil, TipoCasilla::CALLE, nil)
+        new(titulo.nombre, titulo, nil, @@carcel, nil, TipoCasilla::CALLE, nil)
       end
       
       def self.new_impuesto (cantidad, nombre)    #impuesto
-        new(nombre, nil, cantidad, 0, nil, TipoCasilla::IMPUESTO, nil)
+        new(nombre, nil, cantidad, @@carcel, nil, TipoCasilla::IMPUESTO, nil)
       end
       
       def self.new_juez (num_casilla_carcel, nombre)    #juez
@@ -38,7 +37,7 @@ module Civitas
       end
       
       def self.new_sorpresa (mazo, nombre)          #sorpresa
-        new(nombre, nil, nil, 0, mazo, TipoCasilla::SORPRESA, mazo.siguiente)
+        new(nombre, nil, nil, @@carcel, mazo, TipoCasilla::SORPRESA, mazo.siguiente)
       end 
       
       private_class_method :new
@@ -76,9 +75,9 @@ module Civitas
       private
       
       def informe (i_actual, todos)
-        evento = "El jugador " + todos[i_actual].nombre + 
+        evento = (#"El jugador " + todos[i_actual].nombre + 
                  " ha caido en la casilla " + @nombre + "\n" +
-                 " Informacion de la casilla: " + to_string
+                 " Informacion de la casilla: " + to_string)
         Diario.instance.ocurre_evento(evento)
       end
       
@@ -103,5 +102,11 @@ module Civitas
       # def recibe_jugador_sorpresa (i_actual, todos)
         
       # end
+
+      public
+      def main(jugadores)
+        informe(1, jugadores)
+        recibe_jugador_juez(1, jugadores)
+      end
   end
 end
