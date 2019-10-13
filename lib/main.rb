@@ -7,6 +7,7 @@ module Civitas
   nombres = ["Nacho", "Julio", "Adris", "Jacob"]
   puts nombres.size.to_s
   juego = CivitasJuego.new(nombres)
-  puts "Correcto"
+  puts "Juego iniciado"
 
+  juego.info_jugador_texto
 end

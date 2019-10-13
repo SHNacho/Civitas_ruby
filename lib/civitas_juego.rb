@@ -31,7 +31,7 @@ module Civitas
         end
 
         def actualizar_info
-            puts "El nombre del jugador actual es: " + @jugadores[@indice_jugador_actual]
+            puts "El nombre del jugador actual es: " + @jugadores[@indice_jugador_actual].nombre
             puts "El jugador actual se encuentra en la casilla: " + @jugadores[@indice_jugador_actual].num_casilla_actual.to_s
             puts "El saldo del jugador actual es: " + @jugadores[@indice_jugador_actual].saldo.to_s
             puts "Tiene " + @jugadores[@indice_jugador_actual].propiedades.size.to_s + "propiedades"
@@ -69,9 +69,9 @@ module Civitas
         end
 
         def info_jugador_texto
-            info = ("Nombre: " + @jugadores[@indice_jugador_actual].nombre 
-                    + " Casilla: " + @jugadores[@indice_jugador_actual].num_casilla_actual 
-                    + " Saldo: " + @jugadores[@indice_jugador_actual].saldo)
+            info = (#"Nombre: " + @jugadores[@indice_jugador_actual].nombre 
+                    + " Casilla: " + @jugadores[@indice_jugador_actual].num_casilla_actual.to_s
+                    + " Saldo: " + @jugadores[@indice_jugador_actual].saldo.to_s)
             
             return info
         end
@@ -93,7 +93,7 @@ module Civitas
             return (@jugadores[@indice_jugador_actual].vender(ip))
         end
 
-        def contabilizar_paso_por_salida(jugadorActual)
+        def contabilizar_pasos_por_salida(jugadorActual)
             if (@tablero.por_salida > 0)
                 jugadorActual.pasa_por_salida
             end
