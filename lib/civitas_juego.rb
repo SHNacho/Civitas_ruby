@@ -158,9 +158,9 @@ module Civitas
             
             sorpresa1 = Sorpresa.new_ircasilla(TipoSorpresa::IRCASILLA, @tablero, 2, "ircasilla")
   
-            sorpresa2.aplicar_a_jugador(1, jugadores)
+            sorpresa2.aplicar_a_jugador(1, @jugadores)
             
-            sorpresa1.aplicar_a_jugador(1, jugadores)
+            sorpresa1.aplicar_a_jugador(1, @jugadores)
             
             
         end

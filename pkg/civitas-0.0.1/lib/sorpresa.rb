@@ -56,7 +56,7 @@ module Civitas
     end
 
     private
-    def apliar_a_jugador_salir_carcel (actual, todos)
+    def aplicar_a_jugador_salir_carcel (actual, todos)
       if jugador_correcto(actual, todos)
         informe(actual, todos)
         la_tiene = false
@@ -74,7 +74,7 @@ module Civitas
       end
     end
 
-    def aplicar_a_jugado_por_jugador(actual, todos)
+    def aplicar_a_jugador_por_jugador(actual, todos)
       if(jugador_correcto(actual, todos))
         informe(actual, todos)
         texto = "pagar a " + todos[actual].nombre + " " + @valor.to_s
@@ -82,14 +82,14 @@ module Civitas
         
         for i in 0..todos.size do
           if i != actual
-            sorpresa_pagan.apliar_a_jugador(i, todos)
+            sorpresa_pagan.aplicar_a_jugador(i, todos)
           end
         end
 
         texto = "Recibe " + @valor.to_s + " de cada jugador"
         sorpresa_recibe = Sorpresa.new_sorpresa(TipoSorpresa::PAGARCOBRAR, @valor*(todos.size - 1), texto)
 
-        sorpresa_recibe.apliar_a_jugador(actual, todos)
+        sorpresa_recibe.aplicar_a_jugador(actual, todos)
       end
     end
 
@@ -105,7 +105,7 @@ module Civitas
       end
     end
 
-    def aplicar_juagador_pagar_cobrar(actual, todos)
+    def aplicar_jugador_pagar_cobrar(actual, todos)
       if jugador_correcto(actual, todos)
         informe(actual, todos)
         todos[actual].modificar_saldo(@valor)
@@ -141,22 +141,17 @@ module Civitas
         when TipoSorpresa::IRCASILLA
           aplicar_a_jugador_ir_a_casilla(actual, todos)
         when TipoSorpresa::PAGARCOBRAR
-          aplicar_juagador_pagar_cobrar(actual, todos)
+          aplicar_jugador_pagar_cobrar(actual, todos)
         when TipoSorpresa::PORCASAHOTEL
           aplicar_jugador_por_casa_hotel(actual, todos)
         when TipoSorpresa::PORJUGADOR
-          aplicar_a_jugado_por_jugador(actual, todos)
+          aplicar_a_jugador_por_jugador(actual, todos)
         when TipoSorpresa::SALIRCARCEL
           apliar_a_jugador_salir_carcel(actual, todos)
         end
         
       end
     end
-
-
-
-
-
     private_class_method :new
   end
 end

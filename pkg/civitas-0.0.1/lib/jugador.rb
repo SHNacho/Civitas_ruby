@@ -132,7 +132,7 @@ module Civitas
     
     def paga_alquiler (cantidad)
       if !@encarcelado
-        return paga(cantidad);
+        return paga(cantidad)
       end
       
       return false;
