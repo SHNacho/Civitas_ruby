@@ -22,12 +22,12 @@ module Civitas
             end
 
             @gestor_estados = Gestor_estados.new
-            @gestor_estados.estado_inicial
+            @estado = @gestor_estados.estado_inicial
             @indice_jugador_actual = Dado.instance.quien_empieza(@jugadores.size)
-            @estado = nil
             @mazo = MazoSorpresas.new
             inicializar_mazo_sorpresas(@tablero)
             inicializar_tablero(@mazo)
+
         end
 
         def actualizar_info
@@ -94,7 +94,7 @@ module Civitas
         end
 
         def contabilizar_pasos_por_salida(jugadorActual)
-            if (@tablero.por_salida > 0)
+            while @tablero.por_salida > 0
                 jugadorActual.pasa_por_salida
             end
         end
@@ -133,7 +133,7 @@ module Civitas
             @jugadores[2].modificar_saldo(600)
             @jugadores[3].modificar_saldo(100)
 
-            ranking
+            #ranking
 
             for jugador in @jugadores
                 puts jugador.nombre
@@ -153,6 +153,41 @@ module Civitas
             if @jugadores[3].salir_carcel_tirando
                 puts "Ha salido tirando"
             end
+
+            puts "Jugador actual: " + @indice_jugador_actual.to_s
+            puts @jugadores[@indice_jugador_actual].num_casilla_actual.to_s
+            nuevaPos = @tablero.nueva_posicion(@jugadores[@indice_jugador_actual].num_casilla_actual, 8)
+            @jugadores[@indice_jugador_actual].mover_a_casilla(nuevaPos)
+            puts @jugadores[@indice_jugador_actual].num_casilla_actual.to_s
+            contabilizar_pasos_por_salida(@jugadores[@indice_jugador_actual])
+
+            puts "Saldo: " + @jugadores[@indice_jugador_actual].saldo.to_s
+
+            siguiente_paso_completado(Operaciones_juego::AVANZAR)
+
+            puts @estado.to_s
+
+            pasar_turno
+
+            puts @indice_jugador_actual.to_s
+
+            s1 = Sorpresa.new_ircarcel(TipoSorpresa::IRCARCEL, @tablero)
+            s1.aplicar_a_jugador(@indice_jugador_actual, @jugadores)
+            puts "Estoy en: " + @jugadores[@indice_jugador_actual].num_casilla_actual.to_s
+
+            puts @jugadores[@indice_jugador_actual].to_string
+
+            puts "Saldo actual de " + @indice_jugador_actual.to_s + ": " + @jugadores[@indice_jugador_actual].saldo.to_s
+            s2 = Sorpresa.new_sorpresa(TipoSorpresa::PORJUGADOR, 100, "muertos")
+            s2.aplicar_a_jugador(@indice_jugador_actual, @jugadores)
+            puts "Saldo final de " + @indice_jugador_actual.to_s + ": " + @jugadores[@indice_jugador_actual].saldo.to_s
+
+            pasar_turno
+
+            s3 = Sorpresa.new_salircarcel(TipoSorpresa::SALIRCARCEL, @mazo)
+            s3.aplicar_a_jugador(@indice_jugador_actual, @jugadores)
+            puts @jugadores[@indice_jugador_actual].to_string
+
         end
 
     end

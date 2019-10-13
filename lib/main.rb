@@ -50,5 +50,11 @@ module Civitas
 
   juego.main
 
+  jugadores[0].main
+  puts jugadores[0].to_string
+
+  titulo = Titulo_propiedad.new("Titulo", 10, 10, 10, 10, 10)
+  puts titulo.to_string
+
     
 end
