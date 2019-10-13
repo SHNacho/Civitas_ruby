@@ -213,7 +213,7 @@ module Civitas
                     @propiedades.delete_at(ip)
                     evento = "El jugador " + @nombre 
                                     + " ha vendido su propiedad " 
-                                    + Integer.to_s(ip)
+                                    + ip.to_s
                     Diario.instance.ocurre_evento(evento)
                 end
             end
@@ -229,12 +229,12 @@ module Civitas
     def to_string
         encarcelado_str = @encarcelado ? "Sí" : "No"
         salvoconducto_str = (@salvo_conducto == nil) ? "No" : "Sí"
-        propiedades_str = Integer.to_s(@propiedades.size)
+        propiedades_str = (@propiedades.size).to_s
         puede_comprar_str = @puede_comprar ? "Sí" : "No"
         str =       "JUGADOR \n" +
                      "Nombre:         " + @nombre + "\n" + 
-                     "Saldo:          " + Float.to_s(@saldo) + "\n" +
-                     "Casilla actual: " + Integer.to_s(@num_casilla_actual) + "\n" +
+                     "Saldo:          " + @saldo.to_s + "\n" +
+                     "Casilla actual: " + @num_casilla_actual.to_s + "\n" +
                      "Encarcelado:    " + encarcelado_str + "\n" +
                      "Salvoconducto:  " + salvoconducto_str + "\n" +
                      "Propiedades:    " + propiedades_str + "\n" +

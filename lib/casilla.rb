@@ -61,13 +61,13 @@ module Civitas
       
       def to_string
         str = "CASILLA: \n" + "Nombre:    " + @nombre + "\n" +
-              "Tipo:    " + @tipo + "\n"
+              "Tipo:    " + @tipo.to_s + "\n"
         
         case @tipo
-          when @tipo = TipoCasilla::IMPUESTO
-            str+="Importe:    " + Float.to_s(@importe) + "\n"
-          when @tipo = TipoCasilla::JUEZ
-            str+="Casilla carcel:    " + Integer.to_s(@@carcel)
+          when TipoCasilla::IMPUESTO
+            str+="Importe:    " + @importe.to_s + "\n"
+          when TipoCasilla::JUEZ
+            str+="Casilla carcel:    " + @@carcel.to_s
         end
         
         return str
