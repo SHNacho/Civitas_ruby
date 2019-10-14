@@ -28,19 +28,19 @@ module Civitas
     end
 
     def to_string
-      str = @tipo + "\n" + @texto
+      str = @tipo.to_s + "\n" + @texto
       return str
     end
 
     def usada
-      if tipo == TipoSorpresa::SALIRCARCEL
-        mazo.inhabilitar_carta_especial(self)
+      if @tipo == TipoSorpresa::SALIRCARCEL
+        @mazo.inhabilitar_carta_especial(self)
       end
     end
 
     def salir_del_mazo
-      if tipo == TipoSorpresa::SALIRCARCEL
-        mazo.inhabilitar_carta_especial
+      if @tipo == TipoSorpresa::SALIRCARCEL
+        @mazo.inhabilitar_carta_especial(self)
       end
     end
 
@@ -55,6 +55,7 @@ module Civitas
         diario.ocurre_evento(str)
       end
     end
+<<<<<<< HEAD
     
     def aplicar_a_jugador(actual, todos)
       if jugador_correcto(actual, todos)
@@ -71,6 +72,24 @@ module Civitas
           aplicar_a_jugador_por_jugador(actual, todos)
         when TipoSorpresa::SALIRCARCEL
           apliar_a_jugador_salir_carcel(actual, todos)
+=======
+
+    def aplicar_a_jugador(actual, todos)
+      if jugador_correcto(actual, todos)
+        case @tipo
+        when TipoSorpresa::IRCARCEL
+          aplicar_a_jugador_ir_carcel(actual, todos)
+        when TipoSorpresa::IRCASILLA
+          aplicar_a_jugador_ir_a_casilla(actual, todos)
+        when TipoSorpresa::PAGARCOBRAR
+          aplicar_jugador_pagar_cobrar(actual, todos)
+        when TipoSorpresa::PORCASAHOTEL
+          aplicar_jugador_por_casa_hotel(actual, todos)
+        when TipoSorpresa::PORJUGADOR
+          aplicar_a_jugador_por_jugador(actual, todos)
+        when TipoSorpresa::SALIRCARCEL
+          aplicar_a_jugador_salir_carcel(actual, todos)
+>>>>>>> origin/master
         end
         
       end
@@ -89,7 +108,7 @@ module Civitas
         end
 
         if !la_tiene
-          todos[actual].obtener_salvoconducto
+          todos[actual].obtener_salvoconducto(self)
           salir_del_mazo
         end
       end
@@ -135,7 +154,11 @@ module Civitas
 
     def aplicar_a_jugador_ir_carcel(actual, todos)
       if jugador_correcto(actual, todos)
+<<<<<<< HEAD
         casilla = @tablero.carcel
+=======
+        casilla = @tablero.num_casilla_carcel
+>>>>>>> origin/master
         todos[actual].encarcelar(casilla)
       end
     end
@@ -150,9 +173,20 @@ module Civitas
 
         todos[actual].mover_a_casilla(nuevaPos)
         casilla = @tablero.casilla(@valor)
+<<<<<<< HEAD
        # casilla.recibe_jugador(actual, todos)
       end
     end
+=======
+        casilla.recibe_jugador(actual, todos)
+      end
+    end
+
+
+
+
+
+>>>>>>> origin/master
     private_class_method :new
   end
 end
