@@ -1,5 +1,6 @@
 require_relative 'enum.rb'
 require_relative 'diario.rb'
+require_relative 'enum.rb'
 module Civitas
   class Sorpresa
 
@@ -28,19 +29,19 @@ module Civitas
     end
 
     def to_string
-      str = @tipo + "\n" + @texto
+      str = @tipo.to_s + "\n" + @texto
       return str
     end
 
     def usada
-      if tipo == TipoSorpresa::SALIRCARCEL
-        mazo.inhabilitar_carta_especial(self)
+      if @tipo == TipoSorpresa::SALIRCARCEL
+        @mazo.inhabilitar_carta_especial(self)
       end
     end
 
     def salir_del_mazo
-      if tipo == TipoSorpresa::SALIRCARCEL
-        mazo.inhabilitar_carta_especial
+      if @tipo == TipoSorpresa::SALIRCARCEL
+        @mazo.inhabilitar_carta_especial(self)
       end
     end
 
@@ -55,7 +56,7 @@ module Civitas
         diario.ocurre_evento(str)
       end
     end
-    
+
     def aplicar_a_jugador(actual, todos)
       if jugador_correcto(actual, todos)
         case @tipo
@@ -70,7 +71,7 @@ module Civitas
         when TipoSorpresa::PORJUGADOR
           aplicar_a_jugador_por_jugador(actual, todos)
         when TipoSorpresa::SALIRCARCEL
-          apliar_a_jugador_salir_carcel(actual, todos)
+          aplicar_a_jugador_salir_carcel(actual, todos)
         end
         
       end
@@ -89,7 +90,7 @@ module Civitas
         end
 
         if !la_tiene
-          todos[actual].obtener_salvoconducto
+          todos[actual].obtener_salvoconducto(self)
           salir_del_mazo
         end
       end
@@ -135,7 +136,7 @@ module Civitas
 
     def aplicar_a_jugador_ir_carcel(actual, todos)
       if jugador_correcto(actual, todos)
-        casilla = @tablero.carcel
+        casilla = @tablero.num_casilla_carcel
         todos[actual].encarcelar(casilla)
       end
     end
@@ -150,9 +151,14 @@ module Civitas
 
         todos[actual].mover_a_casilla(nuevaPos)
         casilla = @tablero.casilla(@valor)
-       # casilla.recibe_jugador(actual, todos)
+        casilla.recibe_jugador(actual, todos)
       end
     end
+
+
+
+
+
     private_class_method :new
   end
 end

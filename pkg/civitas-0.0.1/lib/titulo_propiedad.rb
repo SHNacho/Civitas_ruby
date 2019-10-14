@@ -1,4 +1,4 @@
-#encoding:utf-8
+# encoding:utf-8
 
 module Civitas
 
@@ -61,8 +61,7 @@ module Civitas
       comprada = false
       
       if !tiene_propietario
-        jugador.paga(@precio_compra)
-        @propietario = jugador
+        jugador.paga(@propietario = jugador)
         comprada = true
       end
       

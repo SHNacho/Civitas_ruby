@@ -1,4 +1,7 @@
-#encoding:utf-8
+# encoding:utf-8
+
+#No necesarios
+require_relative 'sorpresa.rb'
 
 module Civitas
   class Jugador
@@ -196,7 +199,7 @@ module Civitas
       return @propiedades.size > 0
     end
     
-    def tiene_salvo_conducto
+    def tiene_salvoconducto
       return @salvoconducto != nil
     end
     
@@ -226,7 +229,7 @@ module Civitas
     def to_string
         encarcelado_str = @encarcelado ? "Sí" : "No"
         salvoconducto_str = (@salvoconducto == nil) ? "No" : "Sí"
-        propiedades_str = (@propiedades.size).to_s
+        propiedades_str = @propiedades.size.to_s
         puede_comprar_str = @puede_comprar ? "Sí" : "No"
         str =       "JUGADOR \n" +
                      "Nombre:         " + @nombre + "\n" + 
@@ -251,7 +254,7 @@ module Civitas
       debe_serlo = false
       
       if !@encarcelado
-        if !tiene_salvo_conducto
+        if !tiene_salvoconducto
           debe_serlo=true
         else
           debe_serlo = false
@@ -324,12 +327,33 @@ module Civitas
     end
 
     protected
-    
     attr_reader :propiedades
     attr_reader :saldo
-    
-    public
     attr_reader :nombre
+
+    public
+
+    def main
+      mazo = MazoSorpresas.new
+      sorpresa = Sorpresa.new_salircarcel(TipoSorpresa::SALIRCARCEL, mazo)
+      if obtener_salvoconducto(sorpresa)
+        puts "Salvoconducto obtenido"
+      end
+
+      recibe(200)
+
+      puts "Saldo: " + @saldo.to_s
+
+      debe_ser_encarcelado
+
+
+      if puedo_gastar(10000)
+        puts "Puedo"
+      else
+        puts "No puedo"
+      end
+    end
 
   end
 end
+

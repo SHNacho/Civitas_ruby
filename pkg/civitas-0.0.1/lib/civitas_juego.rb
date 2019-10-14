@@ -7,7 +7,6 @@ require_relative 'tablero.rb'
 require_relative 'casilla.rb'
 require_relative 'sorpresa.rb'
 require_relative 'dado.rb'
-require_relative 'diario.rb'
 
 module Civitas
     class CivitasJuego
@@ -26,6 +25,7 @@ module Civitas
             @estado = @gestor_estados.estado_inicial
             @indice_jugador_actual = Dado.instance.quien_empieza(@jugadores.size)
             @mazo = MazoSorpresas.new
+            @tablero = Tablero.new(4)
             inicializar_mazo_sorpresas(@tablero)
             inicializar_tablero(@mazo)
 
@@ -109,7 +109,6 @@ module Civitas
         end
 
         def inicializar_tablero(mazo)
-            @tablero = Tablero.new(4)
             
             @tablero.añade_juez
             @tablero.añade_casilla(Casilla.new_descanso("Descanso"))
@@ -154,18 +153,6 @@ module Civitas
             if @jugadores[3].salir_carcel_tirando
                 puts "Ha salido tirando"
             end
-<<<<<<< HEAD
-            
-            sorpresa2 = Sorpresa.new_ircasilla(TipoSorpresa::IRCASILLA, @tablero, 3, "ircasilla")
-            
-            sorpresa1 = Sorpresa.new_ircasilla(TipoSorpresa::IRCASILLA, @tablero, 2, "ircasilla")
-  
-            sorpresa2.aplicar_a_jugador(1, @jugadores)
-            
-            sorpresa1.aplicar_a_jugador(1, @jugadores)
-            
-            
-=======
 
             puts "Jugador actual: " + @indice_jugador_actual.to_s
             puts @jugadores[@indice_jugador_actual].num_casilla_actual.to_s
@@ -201,7 +188,6 @@ module Civitas
             s3.aplicar_a_jugador(@indice_jugador_actual, @jugadores)
             puts @jugadores[@indice_jugador_actual].to_string
 
->>>>>>> origin/master
         end
 
     end
