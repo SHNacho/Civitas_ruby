@@ -1,6 +1,4 @@
-# To change this license header, choose License Headers in Project Properties.
-# To change this template file, choose Tools | Templates
-# and open the template in the editor.
+# encoding:utf-8
 
 module Civitas
 
@@ -8,7 +6,7 @@ module Civitas
 
     @@factor_intereses_hipoteca = 1.1
     
-    private attr_reader :hipoteca_base
+    
     
     attr_reader :propietario
     
@@ -63,8 +61,7 @@ module Civitas
       comprada = false
       
       if !tiene_propietario
-        jugador.paga(@precio_compra)
-        @propietario = jugador
+        jugador.paga(@propietario = jugador)
         comprada = true
       end
       
@@ -171,20 +168,22 @@ module Civitas
 
           str = "TituloPropiedad" + "\n" +
                       "-Nombre:                   " + @nombre + "\n" +
-                      "-Precio base de alquiler:  " + Float.to_s(@alquiler_base) + "\n" +
-                      "-Factor de revalorización: " + Float.to_s(@factor_revalorizacion) + "\n" +
-                      "-Hipoteca base:            " + Float.to_s(@hipoteca_base) + "\n" +
-                      "-Precio de compra:         " + Float.to_s(@precio_compra) + "\n" +
-                      "-Precio de edificar:       " + Float.to_s(@precio_edificar) + "\n" +
+                      "-Precio base de alquiler:  " + @alquiler_base.to_s + "\n" +
+                      "-Factor de revalorización: " + @factor_revalorizacion.to_s + "\n" +
+                      "-Hipoteca base:            " + @hipoteca_base.to_s + "\n" +
+                      "-Precio de compra:         " + @precio_compra.to_s + "\n" +
+                      "-Precio de edificar:       " + @precio_edificar.to_s + "\n" +
                       "-Propietario:              " + nombre_propietario + "\n" +
                       "-Hipotecado:               " + hipotecado_str + "\n" +
-                      "-Numero de casas:          " + Integer.to_s(@num_casas) + "\n" +
-                      "-Numero de hoteles:        " + Integer.to_s(@num_hoteles) + "\n"
+                      "-Numero de casas:          " + @num_casas.to_s + "\n" +
+                      "-Numero de hoteles:        " + @num_hoteles.to_s + "\n"
 
           return str
     end
 
     private
+
+    attr_reader :hipoteca_base
 
     def es_este_el_propietario (jugador)
       lo_es = false

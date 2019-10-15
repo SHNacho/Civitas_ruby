@@ -104,7 +104,7 @@ module Civitas
       # end
 
       public
-      def main(jugadores)
+      def test(jugadores)
         informe(1, jugadores)
         recibe_jugador_juez(1, jugadores)
       end

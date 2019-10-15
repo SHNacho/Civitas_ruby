@@ -8,12 +8,12 @@ module Civitas
     
     include Comparable
     
-    @@casas_max = 4
+    @@casas_max       = 4
     @@casas_por_hotel = 4
-    @@hoteles_max = 4
-    @@paso_por_salida  = 1000
+    @@hoteles_max     = 4
+    @@paso_por_salida = 1000
     @@precio_libertad = 200
-    @@saldo_inicial = 7500
+    @@saldo_inicial   = 7500
     
     
     attr_reader :casas_por_hotel
@@ -24,24 +24,34 @@ module Civitas
     
     def initialize (nombre, otro=nil)
       if otro == nil
-        @nombre = nombre
-        @encarcelado = false
+        @nombre             = nombre
+        @encarcelado        = false
         @num_casilla_actual = 0
-        @puede_comprar = true
-        @saldo = @@saldo_inicial
-        @salvoconducto = nil
-        @propiedades = []
+        @puede_comprar      = true
+        @saldo              = @@saldo_inicial
+        @salvoconducto      = nil
+        @propiedades        = []
       else
-        @nombre = otro.nombre
-        @encarcelado = otro.encarcelado
+        @nombre             = otro.nombre
+        @encarcelado        = otro.encarcelado
         @num_casilla_actual = otro.num_casilla_actual
-        @puede_comprar = otro.puede_comprar
-        @saldo = otro.saldo
-        @salvoconducto = otro.salvoconducto
-        @propiedades = otro.propiedades
+        @puede_comprar      = otro.puede_comprar
+        @saldo              = otro.saldo
+        @salvoconducto      = otro.salvoconducto
+        @propiedades        = otro.propiedades
       end
     end
+
+    def self.new_jugador(nombre)
+      new(nombre)
+    end
+
+    def self.new_copy(otro)
+      new(nil, otro)
+    end
     
+    private_class_method :new
+
     public
     
     def cancelar_hipoteca (ip)
@@ -328,12 +338,14 @@ module Civitas
 
     protected
     attr_reader :propiedades
+
+    public
     attr_reader :saldo
     attr_reader :nombre
 
     public
 
-    def main
+    def test
       mazo = MazoSorpresas.new
       sorpresa = Sorpresa.new_salircarcel(TipoSorpresa::SALIRCARCEL, mazo)
       if obtener_salvoconducto(sorpresa)

@@ -1,53 +1,57 @@
-# To change this license header, choose License Headers in Project Properties.
-# To change this template file, choose Tools | Templates
-# and open the template in the editor.
+# encoding:utf-8
 
+#No necesarios
+require_relative 'sorpresa.rb'
 
 module Civitas
   class Jugador
     
     include Comparable
     
-    @@casas_max = 4
+    @@casas_max       = 4
     @@casas_por_hotel = 4
-    @@hoteles_max = 4
-    @@paso_por_salida  = 1000
+    @@hoteles_max     = 4
+    @@paso_por_salida = 1000
     @@precio_libertad = 200
-    @@saldo_inicial = 7500
+    @@saldo_inicial   = 7500
     
-    private attr_reader :casas_max
+    
     attr_reader :casas_por_hotel
-    private attr_reader :hoteles_max
-    protected attr_reader :nombre
     attr_reader :num_casilla_actual
-    private attr_reader :precio_libertad
-    private attr_reader :paso_por_salida
-    protected attr_reader :propiedades
     attr_reader :puede_comprar
-    protected attr_reader :saldo
     attr_reader :encarcelado
     
     
     def initialize (nombre, otro=nil)
       if otro == nil
-        @nombre = nombre
-        @encarcelado = false
+        @nombre             = nombre
+        @encarcelado        = false
         @num_casilla_actual = 0
-        @puede_comprar = true
-        @saldo = @@saldo_inicial
-        @salvo_conducto = nil
-        @propiedades = []
+        @puede_comprar      = true
+        @saldo              = @@saldo_inicial
+        @salvoconducto      = nil
+        @propiedades        = []
       else
-        @nombre = otro.nombre
-        @encarcelado = otro.encarcelado
+        @nombre             = otro.nombre
+        @encarcelado        = otro.encarcelado
         @num_casilla_actual = otro.num_casilla_actual
-        @puede_comprar = otro.puede_comprar
-        @saldo = otro.saldo
-        @salvo_conducto = otro.salvo_conducto
-        @propiedades = otro.propiedades
+        @puede_comprar      = otro.puede_comprar
+        @saldo              = otro.saldo
+        @salvoconducto      = otro.salvoconducto
+        @propiedades        = otro.propiedades
       end
     end
+
+    def self.new_jugador(nombre)
+      new(nombre)
+    end
+
+    def self.new_copy(otro)
+      new(nil, otro)
+    end
     
+    private_class_method :new
+
     public
     
     def cancelar_hipoteca (ip)
@@ -102,7 +106,7 @@ module Civitas
     def modificar_saldo (cantidad)
       @saldo += cantidad
       
-      evento = "El saldo del jugador " + @nombre + " ha aumentado en " + cantidad
+      evento = "El saldo del jugador " + @nombre + " ha aumentado en " + cantidad.to_s
       
       Diario.instance.ocurre_evento(evento)
       
@@ -116,7 +120,7 @@ module Civitas
         @num_casilla_actual = num_casilla
         @puede_comprar = false
         evento = "El jugador " + @nombre + " se ha movido a la casilla numero "+ 
-                  num_casilla
+                  num_casilla.to_s
                 Diario.instance.ocurre_evento(evento)
         puede_mover = true
       end
@@ -124,11 +128,11 @@ module Civitas
       return puede_mover
     end
     
-    def obtener_salvo_conducto (sorpresa)
+    def obtener_salvoconducto (sorpresa)
       puede = false
       
       if !@encarcelado
-        @salvo_conducto = sorpresa
+        @salvoconducto = sorpresa
         puede = true
       end
       
@@ -141,7 +145,7 @@ module Civitas
     
     def paga_alquiler (cantidad)
       if !@encarcelado
-        return paga(cantidad);
+        return paga(cantidad)
       end
       
       return false;
@@ -156,7 +160,7 @@ module Civitas
     end
     
     def pasa_por_salida
-      modificar_saldo(@paso_por_salida)
+      modificar_saldo(@@paso_por_salida)
       Diario.instance.ocurre_evento("El jugador " + @nombre +" ha pasado por salida")
       
       return true
@@ -182,8 +186,8 @@ module Civitas
     
     def salir_carcel_pagando
        sale = false;
-        if @encarcelado && puedo_salir_carcel_pagando
-            paga(@precio_libertad)
+        if @encarcelado && puede_salir_carcel_pagando
+            paga(@@precio_libertad)
             sale = true
             @encarcelado = false
             Diario.instance.ocurre_evento("Jugador " + @nombre + " ha salido de la carcel")
@@ -205,8 +209,8 @@ module Civitas
       return @propiedades.size > 0
     end
     
-    def tiene_salvo_conducto
-      return @salvo_conducto != nil
+    def tiene_salvoconducto
+      return @salvoconducto != nil
     end
     
     def vender (ip)
@@ -219,7 +223,7 @@ module Civitas
                     @propiedades.delete_at(ip)
                     evento = "El jugador " + @nombre 
                                     + " ha vendido su propiedad " 
-                                    + Integer.to_s(ip)
+                                    + ip.to_s
                     Diario.instance.ocurre_evento(evento)
                 end
             end
@@ -234,13 +238,13 @@ module Civitas
     
     def to_string
         encarcelado_str = @encarcelado ? "Sí" : "No"
-        salvoconducto_str = (@salvo_conducto == nil) ? "No" : "Sí"
-        propiedades_str = Integer.to_s(@propiedades.size)
+        salvoconducto_str = (@salvoconducto == nil) ? "No" : "Sí"
+        propiedades_str = @propiedades.size.to_s
         puede_comprar_str = @puede_comprar ? "Sí" : "No"
         str =       "JUGADOR \n" +
                      "Nombre:         " + @nombre + "\n" + 
-                     "Saldo:          " + Float.to_s(@saldo) + "\n" +
-                     "Casilla actual: " + Integer.to_s(@num_casilla_actual) + "\n" +
+                     "Saldo:          " + @saldo.to_s + "\n" +
+                     "Casilla actual: " + @num_casilla_actual.to_s + "\n" +
                      "Encarcelado:    " + encarcelado_str + "\n" +
                      "Salvoconducto:  " + salvoconducto_str + "\n" +
                      "Propiedades:    " + propiedades_str + "\n" +
@@ -250,16 +254,21 @@ module Civitas
     end
     
     private
+
+    attr_reader :casas_max
+    attr_reader :hoteles_max
+    attr_reader :precio_libertad
+    attr_reader :paso_por_salida
     
     def debe_ser_encarcelado
       debe_serlo = false
       
       if !@encarcelado
-        if !tiene_salvo_conducto
+        if !tiene_salvoconducto
           debe_serlo=true
         else
           debe_serlo = false
-          perder_salvo_conducto
+          perder_salvoconducto
         end
       end
       
@@ -276,9 +285,9 @@ module Civitas
       return existe
     end
     
-    def perder_salvo_conducto
-      @salvo_conducto.usada
-      @salvo_conducto = nil
+    def perder_salvoconducto
+      @salvoconducto.usada
+      @salvoconducto = nil
     end
     
     def puede_salir_carcel_pagando
@@ -326,5 +335,36 @@ module Civitas
       
       return puedo
     end
+
+    protected
+    attr_reader :propiedades
+
+    public
+    attr_reader :saldo
+    attr_reader :nombre
+
+    public
+
+    def test
+      mazo = MazoSorpresas.new
+      sorpresa = Sorpresa.new_salircarcel(TipoSorpresa::SALIRCARCEL, mazo)
+      if obtener_salvoconducto(sorpresa)
+        puts "Salvoconducto obtenido"
+      end
+
+      recibe(200)
+
+      puts "Saldo: " + @saldo.to_s
+
+      debe_ser_encarcelado
+
+
+      if puedo_gastar(10000)
+        puts "Puedo"
+      else
+        puts "No puedo"
+      end
+    end
+
   end
 end
