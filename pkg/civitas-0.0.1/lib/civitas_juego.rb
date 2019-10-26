@@ -31,10 +31,7 @@ module Civitas
         end
 
         def actualizar_info
-            # puts "El nombre del jugador actual es: " + @jugadores[@indice_jugador_actual].nombre
-            puts "El jugador actual se encuentra en la casilla: " + @jugadores[@indice_jugador_actual].num_casilla_actual.to_s
-            # puts "El saldo del jugador actual es: " + @jugadores[@indice_jugador_actual].saldo.to_s
-            # puts "Tiene " + @jugadores[@indice_jugador_actual].propiedades.size.to_s + "propiedades"
+            puts @jugadores[@indice_jugador_actual].to_s
 
             if final_del_juego
                 rank = ranking

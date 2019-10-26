@@ -319,7 +319,7 @@ module Civitas
     end
     ########################################################################################
     
-    def to_string
+    def to_s
         encarcelado_str = @encarcelado ? "Sí" : "No"
         salvoconducto_str = (@salvoconducto == nil) ? "No" : "Sí"
         propiedades_str = @propiedades.size.to_s
