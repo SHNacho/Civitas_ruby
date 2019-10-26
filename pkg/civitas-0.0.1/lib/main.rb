@@ -8,5 +8,7 @@ require_relative 'jugador.rb'
 require_relative 'diario.rb'
 
 module Civitas
-
+  nombres = ["Nacho", "Julio"]
+  juego = CivitasJuego.new(nombres)
+  puts "Hola"
 end

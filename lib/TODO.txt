@@ -1,0 +1,4 @@
+CivitasJuego: 
+    -método actualizar_info no puede acceder a las variables protected de jugador
+    -método info_jugador_texto no puede acceder a las variables protected de jugador
+    -método inicializar_tablero e inicializar_mazo: Iniciarlos completamente

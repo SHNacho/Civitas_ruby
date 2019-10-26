@@ -84,7 +84,7 @@ module Civitas
       construido = false
       
       if es_este_el_propietario(jugador)
-        @propietario.paga(@precio_edificar*5)
+        @propietario.paga(@precio_edificar)
         @num_hoteles+=1
         construido = true
       end
