@@ -1,19 +1,18 @@
 # encoding:utf-8
 
-#No necesarios
-require_relative 'sorpresa.rb'
+require_relative 'diario.rb'
 
 module Civitas
   class Jugador
     
     include Comparable
     
-    @@casas_max = 4
+    @@casas_max       = 4
     @@casas_por_hotel = 4
-    @@hoteles_max = 4
-    @@paso_por_salida  = 1000
+    @@hoteles_max     = 4
+    @@paso_por_salida = 1000
     @@precio_libertad = 200
-    @@saldo_inicial = 7500
+    @@saldo_inicial   = 7500
     
     
     attr_reader :casas_por_hotel
@@ -21,37 +20,76 @@ module Civitas
     attr_reader :puede_comprar
     attr_reader :encarcelado
     
+    ########################################################################################
     
     def initialize (nombre, otro=nil)
       if otro == nil
-        @nombre = nombre
-        @encarcelado = false
+        @nombre             = nombre
+        @encarcelado        = false
         @num_casilla_actual = 0
-        @puede_comprar = true
-        @saldo = @@saldo_inicial
-        @salvoconducto = nil
-        @propiedades = []
+        @puede_comprar      = true
+        @saldo              = @@saldo_inicial
+        @salvoconducto      = nil
+        @propiedades        = []
       else
-        @nombre = otro.nombre
-        @encarcelado = otro.encarcelado
+        @nombre             = otro.nombre
+        @encarcelado        = otro.encarcelado
         @num_casilla_actual = otro.num_casilla_actual
-        @puede_comprar = otro.puede_comprar
-        @saldo = otro.saldo
-        @salvoconducto = otro.salvoconducto
-        @propiedades = otro.propiedades
+        @puede_comprar      = otro.puede_comprar
+        @saldo              = otro.saldo
+        @salvoconducto      = otro.salvoconducto
+        @propiedades        = otro.propiedades
       end
     end
+    ########################################################################################
+
+    def self.new_jugador(nombre)
+      new(nombre)
+    end
+    ########################################################################################
+
+    def self.new_copy(otro)
+      new(nil, otro)
+    end
+    ########################################################################################
     
+<<<<<<< HEAD
     protected
     def self.new_copia (otro)
         new("", otro)
     end
     
+=======
+    private_class_method :new
+
+    ########################################################################################
+
+    #===================================MÉTODOS PÚBLICOS===================================#
+>>>>>>> origin/master
     public
     
     def cancelar_hipoteca (ip)
-      
+      result = false
+      if @encarcelado
+        return result
+      end
+
+      if existe_la_propiedad(ip)
+          propiedad = @propiedades[ip]
+          cantidad = propiedad.get_importe_cancelar_hipoteca
+          puedoGastar = puedo_gastar(cantidad)
+
+          if puedoGastar
+            result = propiedad.cancelar_hipoteca(self)
+            if result
+              diario = Diario.instance
+              diario.ocurre_evento("El jugador " + @nombre + "Cancela la hipoteca de la propiedad " 
+                                  + ip.to_s)
+            end
+          end
+      end
     end
+    ########################################################################################
     
     def cantidad_casas_hoteles
       cantidad = 0
@@ -61,6 +99,7 @@ module Civitas
       
       return cantidad
     end
+    ########################################################################################
     
     def comprar (titulo)
       result = false
@@ -84,15 +123,54 @@ module Civitas
       
       return result 
     end
+    ########################################################################################
     
     def construir_casa (ip)
-      
+      result = false
+      puedoEdificarCasa = false
+      if @encarcelado
+        return result
+      else
+        existe = existe_la_propiedad(ip)
+        if existe
+          propiedad = @propiedades[ip]
+          puedoEdificarCasa = puedo_edificar_casa(propiedad)
+          if puedoEdificarCasa
+            result = propiedad.construir_casa(self)
+            if result
+              Diario.instance.ocurre_evento("El jugador " + @nombre + 
+                                            " construye casa en la propiedad " + ip.to_s)
+            end
+          end
+        end
+        return result
+      end
+
     end
+    ########################################################################################
     
     def construir_hotel (ip)
+      result = false
+      if @encarcelado
+        return result
+      end
+
+      if existe_la_propiedad(ip)
+        propiedad = @propiedades[ip]
+        puedoEdificarHotel = puedo_edificar_hotel(propiedad)
+
+        if puedoEdificarHotel
+          result = propiedad.construir_hotel(self)
+          propiedad.derruir_casas(@@casas_por_hotel, self)
+        end
+        Diario.instance.ocurre_evento("El jugador " + @nombre + " construye hotel en la propiedad " 
+                                      + ip.to_s)
+      end
       
+      return result
     end
-    
+    ########################################################################################
+
     def en_bancarrota
       lo_esta = false
       
@@ -102,6 +180,7 @@ module Civitas
       
       return lo_esta
     end
+    ########################################################################################
     
     def encarcelar (num_casilla_carcel)
       if debe_ser_encarcelado
@@ -112,6 +191,7 @@ module Civitas
       
       return @encarcelado
     end
+    ########################################################################################
     
     def hipotecar (ip)
       result = false
@@ -132,6 +212,7 @@ module Civitas
       
       return result
     end
+    ########################################################################################
     
     def modificar_saldo (cantidad)
       @saldo += cantidad
@@ -142,6 +223,7 @@ module Civitas
       
       return true
     end
+    ########################################################################################
     
     def mover_a_casilla (num_casilla)
       puede_mover = false
@@ -157,6 +239,7 @@ module Civitas
       
       return puede_mover
     end
+    ########################################################################################
     
     def obtener_salvoconducto (sorpresa)
       puede = false
@@ -168,10 +251,12 @@ module Civitas
       
       return puede
     end
+    ########################################################################################
     
     def paga (cantidad)
       return (modificar_saldo(cantidad * -1))
     end
+    ########################################################################################
     
     def paga_alquiler (cantidad)
       if !@encarcelado
@@ -180,6 +265,7 @@ module Civitas
       
       return false;
     end
+    ########################################################################################
     
     def paga_impuesto (cantidad)
       if !@encarcelado
@@ -188,6 +274,7 @@ module Civitas
       
       return false
     end
+    ########################################################################################
     
     def pasa_por_salida
       modificar_saldo(@@paso_por_salida)
@@ -195,6 +282,7 @@ module Civitas
       
       return true
     end
+    ########################################################################################
     
     def puede_comprar_casilla
       if @encarcelado
@@ -205,6 +293,7 @@ module Civitas
       
       return @puede_comprar
     end
+    ########################################################################################
     
     def recibe (cantidad)
       if !@encarcelado
@@ -213,6 +302,7 @@ module Civitas
       
       return false
     end
+    ########################################################################################
     
     def salir_carcel_pagando
        sale = false;
@@ -224,6 +314,7 @@ module Civitas
         end
         return sale
     end
+    ########################################################################################
     
     def salir_carcel_tirando
       sale = false
@@ -234,14 +325,17 @@ module Civitas
       end
         return sale
     end
+    ########################################################################################
     
     def tiene_algo_que_gestionar
       return @propiedades.size > 0
     end
+    ########################################################################################
     
     def tiene_salvoconducto
       return @salvoconducto != nil
     end
+    ########################################################################################
     
     def vender (ip)
       puede_vender = false
@@ -260,13 +354,15 @@ module Civitas
         end
 
         return puede_vender
-    end 
+    end
+     ########################################################################################
     
     def <=> (jugador) #1 if self>jugador; 0 if jugador; -1 if self<jugador
       self.saldo <=> jugador.saldo
     end
+    ########################################################################################
     
-    def to_string
+    def to_s
         encarcelado_str = @encarcelado ? "Sí" : "No"
         salvoconducto_str = (@salvoconducto == nil) ? "No" : "Sí"
         propiedades_str = @propiedades.size.to_s
@@ -282,13 +378,19 @@ module Civitas
 
         return str
     end
+    ########################################################################################
     
+    #===================================MÉTODOS PRIVADOS===================================#
     private
+
+    ########################################################################################
 
     attr_reader :casas_max
     attr_reader :hoteles_max
     attr_reader :precio_libertad
     attr_reader :paso_por_salida
+
+    ########################################################################################
     
     def debe_ser_encarcelado
       debe_serlo = false
@@ -304,6 +406,7 @@ module Civitas
       
       return debe_serlo
     end
+    ########################################################################################
     
     def existe_la_propiedad (ip)
       existe = false
@@ -314,11 +417,13 @@ module Civitas
       
       return existe
     end
+    ########################################################################################
     
     def perder_salvoconducto
       @salvoconducto.usada
       @salvoconducto = nil
     end
+    ########################################################################################
     
     def puede_salir_carcel_pagando
       puede = false
@@ -329,32 +434,34 @@ module Civitas
       
       return puede
     end
+    ########################################################################################
     
     def puedo_edificar_casa (propiedad)
       puedo = false
       
-      if @propiedades.include? propiedad && 
-          propiedad.num_casas < @@casas_max && 
-          puedo_gastar(propiedad.precio_edificar)
+      if (propiedad.num_casas < @@casas_max && 
+          puedo_gastar(propiedad.precio_edificar))
         
         puedo = true
       end
       
       return puedo  
     end
+    ########################################################################################
     
     def puedo_edificar_hotel (propiedad)
       puedo = false
       
-      if @propiedades.include? propiedad && 
-          propiedad.num_casas < @@casas_max && 
-          puedo_gastar(propiedad.precio_edificar*5)
+      if (propiedad.num_casas >= @@casas_por_hotel && 
+          propiedad.num_hoteles < @@hoteles_max && 
+          puedo_gastar(propiedad.precio_edificar))
         
         puedo = true
       end
       
       return puedo  
     end
+    ########################################################################################
     
     def puedo_gastar (precio)
       puedo = false
@@ -365,34 +472,12 @@ module Civitas
       
       return puedo
     end
+    ########################################################################################
 
     public
     attr_reader :propiedades
     attr_reader :saldo
     attr_reader :nombre
-
-    public
-
-    def main
-      mazo = MazoSorpresas.new
-      sorpresa = Sorpresa.new_salircarcel(TipoSorpresa::SALIRCARCEL, mazo)
-      if obtener_salvoconducto(sorpresa)
-        puts "Salvoconducto obtenido"
-      end
-
-      recibe(200)
-
-      puts "Saldo: " + @saldo.to_s
-
-      debe_ser_encarcelado
-
-
-      if puedo_gastar(10000)
-        puts "Puedo"
-      else
-        puts "No puedo"
-      end
-    end
 
   end
 end
