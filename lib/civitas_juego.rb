@@ -74,9 +74,10 @@ module Civitas
 
         def final_del_juego
             bancarrota = false
+            i = 0
 
-            for jugador in @jugadores
-                if jugador.en_bancarrota
+            while ( !bancarrota && (i < @jugadores.size) )
+                if @jugadores[i].en_bancarrota
                     bancarrota = true
                 end
             end
@@ -94,9 +95,7 @@ module Civitas
         end
 
         def info_jugador_texto
-            info = (#"Nombre: " + @jugadores[@indice_jugador_actual].nombre 
-                    + " Casilla: " + @jugadores[@indice_jugador_actual].num_casilla_actual.to_s
-                    + " Saldo: " + @jugadores[@indice_jugador_actual].saldo.to_s)
+            info = @jugadores[@indice_jugador_actual].to_s
             
             return info
         end

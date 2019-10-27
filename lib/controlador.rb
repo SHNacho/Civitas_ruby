@@ -4,6 +4,9 @@
 
 
 require_relative 'vista_textual.rb'
+require_relative 'civitas_jugo.rb'
+require_relative 'enum.rb'
+require_relative 'operacion_inmobiliaria.rb'
 
 module Civitas
   class Controlador
@@ -63,11 +66,21 @@ module Civitas
                   @juego.siguiente_paso_completado(operacion)
               end
             when Operaciones_juego::SALIR_CARCEL
-              @vista.
+              salida = @vista.salir_carcel
+              
+              if salida == lista_SalidasCarcel[0]
+                @juego.salir_carcel_pagando
+              else
+                @juego.salir_carcel_tirando
+              end
+              
+            @juego.siguiente_paso_completado(operacion)
           end
-          
         end
       end
+            if @juego.final_del_juego
+              @juego.ranking
+            end
     end
   end
 end

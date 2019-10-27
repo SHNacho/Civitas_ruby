@@ -1,13 +1,18 @@
-# To change this license header, choose License Headers in Project Properties.
-# To change this template file, choose Tools | Templates
-# and open the template in the editor.
-
+#encoding:utf-8
 require_relative 'enum.rb'
+require_relative 'diario.rb'
+require_relative 'civitas_juego.rb'
 require 'io/console'
 
 module Civitas
 
   class Vista_textual
+
+    def initialize
+      @i_propiedad = nil
+      @i_gestion   = nil
+      @juegoModel  = nil
+    end
 
     def mostrar_estado(estado)
       puts estado
@@ -62,23 +67,45 @@ module Civitas
       return opcion
     end
 
+    def salir_carcel
+  
+      opcion = menu("Elige la forma para intentar salir de la carcel",
+                    lista["Pagando", "Tirando el dado"])
+      return (lista_SalidasCarcel[opcion])
+    end
+
     
     def comprar
+      opcion = menu("¿Quieres comprar esta calle?",
+                    lista["SI", "NO"])
+      
+      return (lista_Respuestas[opcion])
     end
 
     def gestionar
+      @i_gestion = menu("¿Qué gestión inmoviliaria quieres hacer?",
+                    lista["VENDER", "HIPOTECAR", "CANCELAR HIPOTECA",
+                          "CONSTRUIR CASA", "CONSTRUIR HOTEL", "TERMINAR"] )
+      #Falta por hacer que pregute sobre que propiedad quiere hacer la gestión
     end
 
     def getGestion
+      return @i_gestion
     end
 
     def getPropiedad
+      return @i_propiedad
     end
 
     def mostrarSiguienteOperacion(operacion)
+      puts "Siguiente operación: " + operacion.to_s
     end
 
     def mostrarEventos
+      diario = Diario.instance
+      while diario.eventos_pendientes
+        puts diario.leer_evento
+      end
     end
 
     def setCivitasJuego(civitas)
@@ -87,6 +114,8 @@ module Civitas
     end
 
     def actualizarVista
+      puts @juegoModel.info_jugador_texto
+      puts @juegoModel.get_casilla_actual.to_s
     end
 
     

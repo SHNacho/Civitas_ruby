@@ -69,7 +69,7 @@ module Civitas
         return correcto
       end
       
-      def to_string
+      def to_s
         str = "CASILLA: \n" + "Nombre:    " + @nombre + "\n" +
               "Tipo:    " + @tipo.to_s + "\n"
         
@@ -86,7 +86,7 @@ module Civitas
       private
       
       def informe (i_actual, todos)
-        evento = (#"El jugador " + todos[i_actual].nombre + 
+        evento = ("El jugador " + i_actual.to_s + 
                  " ha caido en la casilla " + @nombre + "\n" +
                  " Informacion de la casilla: " + to_string)
         Diario.instance.ocurre_evento(evento)
