@@ -42,6 +42,11 @@ module Civitas
       end
     end
     
+    protected
+    def self.new_copia (otro)
+        new("", otro)
+    end
+    
     public
     
     def cancelar_hipoteca (ip)
@@ -58,7 +63,26 @@ module Civitas
     end
     
     def comprar (titulo)
+      result = false
       
+      if @encarcelado
+        return result
+      else
+        
+        if @puede_comprar
+          precio = titulo.precio_compra
+          if puedo_gastar(precio)
+            result = titulo.comprar(self)
+            if result
+              @propiedades << titulo
+              Diario.instance.ocurre_evento("El jugador " + self + " compra la propiedad " + titulo.to_string)
+            end
+            @puede_comprar = false
+          end
+        end
+      end
+      
+      return result 
     end
     
     def construir_casa (ip)
@@ -90,7 +114,23 @@ module Civitas
     end
     
     def hipotecar (ip)
+      result = false
       
+      if @encarcelado
+        return result
+      end
+      
+      if existe_la_propiedad(ip)
+        propiedad = @propiedades[ip]
+        
+        result = propiedad.hipotecar(self)
+      end
+      
+      if result
+        Diario.instance.ocurre_evento("El jugador "+@nombre+ " hipoteca la propiedad "+ip)
+      end
+      
+      return result
     end
     
     def modificar_saldo (cantidad)
@@ -326,7 +366,7 @@ module Civitas
       return puedo
     end
 
-    protected
+    public
     attr_reader :propiedades
     attr_reader :saldo
     attr_reader :nombre

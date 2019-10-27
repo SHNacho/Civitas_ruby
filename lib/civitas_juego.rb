@@ -43,7 +43,7 @@ module Civitas
                 puts "EL RANKING ES EL SIGUIENTE: "
 
                 for jugador in rank
-                    puts (jugador.nombre + " con un saldo de: " +jugador.saldo)
+                    puts (jugador.nombre + " con un saldo de: " +jugador.saldo.to_s)
                 end
             end
         end
@@ -101,6 +101,26 @@ module Civitas
         end
 
         private
+        
+        def avanza_jugador
+          jugador_actual = @jugadores[@indice_jugador_actual]
+          
+          posicion_actual = jugador_actual.num_casilla_actual
+          
+          tirada = Dado.instance.tirar
+          
+          posicion_nueva = @tablero.nueva_posicion(posicion_actual, tirada)
+          
+          casilla = @tablero.casilla(posicion_nueva)
+          
+          contabilizar_pasos_por_salida(jugador_actual)
+          
+          jugador_actual.mover_a_casilla(posicion_nueva)
+          
+          casilla.recibe_jugador(@indice_jugador_actual,@jugadores)
+          
+          contabilizar_pasos_por_salida(jugador_actual)
+        end
 
         def inicializar_mazo_sorpresas(tablero)
             @mazo.al_mazo(Sorpresa.new_ircarcel(TipoSorpresa::IRCARCEL, tablero))

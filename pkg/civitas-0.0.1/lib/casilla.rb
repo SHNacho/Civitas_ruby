@@ -21,11 +21,11 @@ module Civitas
       end
       
       def self.new_descanso(nombre)
-        new(nombre, nil, nil, @@carcel, nil, TipoCasilla::DESCANSO, nil)
+        new(nombre, nil, 0, @@carcel, nil, TipoCasilla::DESCANSO, nil)
       end
       
       def self.new_calle (titulo)   #calle
-        new(titulo.nombre, titulo, nil, @@carcel, nil, TipoCasilla::CALLE, nil)
+        new(titulo.nombre, titulo, 0, @@carcel, nil, TipoCasilla::CALLE, nil)
       end
       
       def self.new_impuesto (cantidad, nombre)    #impuesto
@@ -33,20 +33,20 @@ module Civitas
       end
       
       def self.new_juez (num_casilla_carcel, nombre)    #juez
-        new(nombre, nil, nil, num_casilla_carcel, nil, TipoCasilla::JUEZ, nil)
+        new(nombre, nil, 0, num_casilla_carcel, nil, TipoCasilla::JUEZ, nil)
       end
       
       def self.new_sorpresa (mazo, nombre)          #sorpresa
-        new(nombre, nil, nil, @@carcel, mazo, TipoCasilla::SORPRESA, mazo.siguiente)
+        new(nombre, nil, 0, @@carcel, mazo, TipoCasilla::SORPRESA, mazo.siguiente)
       end 
       
       private_class_method :new
       
       public
       
-      # def recibe_jugador (i_actual, todos)
+      def recibe_jugador (i_actual, todos)
         
-      # end
+      end
       
       def jugador_correcto (i_actual, todos)
         correcto = false
