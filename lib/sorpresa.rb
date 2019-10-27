@@ -1,4 +1,6 @@
 require_relative 'enum.rb'
+require_relative 'diario.rb'
+require_relative 'enum.rb'
 module Civitas
   class Sorpresa
 

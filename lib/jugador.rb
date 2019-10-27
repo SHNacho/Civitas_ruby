@@ -20,7 +20,6 @@ module Civitas
     attr_reader :puede_comprar
     attr_reader :encarcelado
     
-    ########################################################################################
     
     def initialize (nombre, otro=nil)
       if otro == nil
@@ -41,23 +40,17 @@ module Civitas
         @propiedades        = otro.propiedades
       end
     end
-    ########################################################################################
 
     def self.new_jugador(nombre)
       new(nombre)
     end
-    ########################################################################################
 
     def self.new_copy(otro)
       new(nil, otro)
     end
-    ########################################################################################
     
     private_class_method :new
 
-    ########################################################################################
-
-    #===================================MÉTODOS PÚBLICOS===================================#
     public
     
     def cancelar_hipoteca (ip)
@@ -75,13 +68,11 @@ module Civitas
             result = propiedad.cancelar_hipoteca(self)
             if result
               diario = Diario.instance
-              diario.ocurre_evento("El jugador " + @nombre + "Cancela la hipoteca de la propiedad " 
-                                  + ip.to_s)
+              diario.ocurre_evento("El jugador " + @nombre + "Cancela la hipoteca de la propiedad " + ip.to_s)
             end
           end
       end
     end
-    ########################################################################################
     
     def cantidad_casas_hoteles
       cantidad = 0
@@ -91,12 +82,29 @@ module Civitas
       
       return cantidad
     end
-    ########################################################################################
     
     def comprar (titulo)
+      result = false
       
+      if @encarcelado
+        return result
+      else
+        
+        if @puede_comprar
+          precio = titulo.precio_compra
+          if puedo_gastar(precio)
+            result = titulo.comprar(self)
+            if result
+              @propiedades << titulo
+              Diario.instance.ocurre_evento("El jugador " + self + " compra la propiedad " + titulo.to_string)
+            end
+            @puede_comprar = false
+          end
+        end
+      end
+      
+      return result 
     end
-    ########################################################################################
     
     def construir_casa (ip)
       result = false
@@ -120,7 +128,6 @@ module Civitas
       end
 
     end
-    ########################################################################################
     
     def construir_hotel (ip)
       result = false
@@ -136,13 +143,11 @@ module Civitas
           result = propiedad.construir_hotel(self)
           propiedad.derruir_casas(@@casas_por_hotel, self)
         end
-        Diario.instance.ocurre_evento("El jugador " + @nombre + " construye hotel en la propiedad " 
-                                      + ip.to_s)
+        Diario.instance.ocurre_evento("El jugador " + @nombre + " construye hotel en la propiedad " + ip.to_s)
       end
       
       return result
     end
-    ########################################################################################
 
     def en_bancarrota
       lo_esta = false
@@ -153,7 +158,6 @@ module Civitas
       
       return lo_esta
     end
-    ########################################################################################
     
     def encarcelar (num_casilla_carcel)
       if debe_ser_encarcelado
@@ -164,12 +168,26 @@ module Civitas
       
       return @encarcelado
     end
-    ########################################################################################
     
     def hipotecar (ip)
+      result = false
       
+      if @encarcelado
+        return result
+      end
+      
+      if existe_la_propiedad(ip)
+        propiedad = @propiedades[ip]
+        
+        result = propiedad.hipotecar(self)
+      end
+      
+      if result
+        Diario.instance.ocurre_evento("El jugador "+@nombre+ " hipoteca la propiedad "+ip)
+      end
+      
+      return result
     end
-    ########################################################################################
     
     def modificar_saldo (cantidad)
       @saldo += cantidad
@@ -180,7 +198,6 @@ module Civitas
       
       return true
     end
-    ########################################################################################
     
     def mover_a_casilla (num_casilla)
       puede_mover = false
@@ -196,7 +213,6 @@ module Civitas
       
       return puede_mover
     end
-    ########################################################################################
     
     def obtener_salvoconducto (sorpresa)
       puede = false
@@ -208,12 +224,10 @@ module Civitas
       
       return puede
     end
-    ########################################################################################
     
     def paga (cantidad)
       return (modificar_saldo(cantidad * -1))
     end
-    ########################################################################################
     
     def paga_alquiler (cantidad)
       if !@encarcelado
@@ -222,7 +236,6 @@ module Civitas
       
       return false;
     end
-    ########################################################################################
     
     def paga_impuesto (cantidad)
       if !@encarcelado
@@ -231,7 +244,7 @@ module Civitas
       
       return false
     end
-    ########################################################################################
+
     
     def pasa_por_salida
       modificar_saldo(@@paso_por_salida)
@@ -239,7 +252,7 @@ module Civitas
       
       return true
     end
-    ########################################################################################
+
     
     def puede_comprar_casilla
       if @encarcelado
@@ -250,7 +263,7 @@ module Civitas
       
       return @puede_comprar
     end
-    ########################################################################################
+
     
     def recibe (cantidad)
       if !@encarcelado
@@ -259,7 +272,6 @@ module Civitas
       
       return false
     end
-    ########################################################################################
     
     def salir_carcel_pagando
        sale = false;
@@ -271,7 +283,6 @@ module Civitas
         end
         return sale
     end
-    ########################################################################################
     
     def salir_carcel_tirando
       sale = false
@@ -282,17 +293,16 @@ module Civitas
       end
         return sale
     end
-    ########################################################################################
     
     def tiene_algo_que_gestionar
       return @propiedades.size > 0
     end
-    ########################################################################################
+
     
     def tiene_salvoconducto
       return @salvoconducto != nil
     end
-    ########################################################################################
+
     
     def vender (ip)
       puede_vender = false
@@ -312,12 +322,10 @@ module Civitas
 
         return puede_vender
     end
-     ########################################################################################
     
     def <=> (jugador) #1 if self>jugador; 0 if jugador; -1 if self<jugador
       self.saldo <=> jugador.saldo
     end
-    ########################################################################################
     
     def to_s
         encarcelado_str = @encarcelado ? "Sí" : "No"
@@ -335,12 +343,8 @@ module Civitas
 
         return str
     end
-    ########################################################################################
     
-    #===================================MÉTODOS PRIVADOS===================================#
     private
-
-    ########################################################################################
 
     attr_reader :casas_max
     attr_reader :hoteles_max
@@ -363,7 +367,6 @@ module Civitas
       
       return debe_serlo
     end
-    ########################################################################################
     
     def existe_la_propiedad (ip)
       existe = false
@@ -374,13 +377,11 @@ module Civitas
       
       return existe
     end
-    ########################################################################################
     
     def perder_salvoconducto
       @salvoconducto.usada
       @salvoconducto = nil
     end
-    ########################################################################################
     
     def puede_salir_carcel_pagando
       puede = false
@@ -391,7 +392,6 @@ module Civitas
       
       return puede
     end
-    ########################################################################################
     
     def puedo_edificar_casa (propiedad)
       puedo = false
@@ -404,7 +404,6 @@ module Civitas
       
       return puedo  
     end
-    ########################################################################################
     
     def puedo_edificar_hotel (propiedad)
       puedo = false
@@ -418,7 +417,6 @@ module Civitas
       
       return puedo  
     end
-    ########################################################################################
     
     def puedo_gastar (precio)
       puedo = false
@@ -429,12 +427,12 @@ module Civitas
       
       return puedo
     end
-    ########################################################################################
 
-    protected
+    public
     attr_reader :propiedades
     attr_reader :saldo
     attr_reader :nombre
 
   end
 end
+

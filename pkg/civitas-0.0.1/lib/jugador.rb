@@ -53,6 +53,73 @@ module Civitas
     end
     ########################################################################################
     
+# encoding:utf-8
+
+require_relative 'diario.rb'
+
+module Civitas
+  class Jugador
+    
+    include Comparable
+    
+    @@casas_max       = 4
+    @@casas_por_hotel = 4
+    @@hoteles_max     = 4
+    @@paso_por_salida = 1000
+    @@precio_libertad = 200
+    @@saldo_inicial   = 7500
+    
+    
+    attr_reader :casas_por_hotel
+    attr_reader :num_casilla_actual
+    attr_reader :puede_comprar
+    attr_reader :encarcelado
+    
+    ########################################################################################
+    
+    def initialize (nombre, otro=nil)
+      if otro == nil
+        @nombre             = nombre
+        @encarcelado        = false
+        @num_casilla_actual = 0
+        @puede_comprar      = true
+        @saldo              = @@saldo_inicial
+        @salvoconducto      = nil
+        @propiedades        = []
+      else
+        @nombre             = otro.nombre
+        @encarcelado        = otro.encarcelado
+        @num_casilla_actual = otro.num_casilla_actual
+        @puede_comprar      = otro.puede_comprar
+        @saldo              = otro.saldo
+        @salvoconducto      = otro.salvoconducto
+        @propiedades        = otro.propiedades
+      end
+    end
+    ########################################################################################
+
+    def self.new_jugador(nombre)
+      new(nombre)
+    end
+    ########################################################################################
+
+    def self.new_copy(otro)
+      new(nil, otro)
+    end
+    ########################################################################################
+    
+
+    protected
+    def self.new_copia (otro)
+        new("", otro)
+    end
+    
+=======
+    private_class_method :new
+
+    ########################################################################################
+
+    #===================================MÉTODOS PÚBLICOS===================================#
     private_class_method :new
 
     ########################################################################################
@@ -94,7 +161,26 @@ module Civitas
     ########################################################################################
     
     def comprar (titulo)
+      result = false
       
+      if @encarcelado
+        return result
+      else
+        
+        if @puede_comprar
+          precio = titulo.precio_compra
+          if puedo_gastar(precio)
+            result = titulo.comprar(self)
+            if result
+              @propiedades << titulo
+              Diario.instance.ocurre_evento("El jugador " + self + " compra la propiedad " + titulo.to_string)
+            end
+            @puede_comprar = false
+          end
+        end
+      end
+      
+      return result 
     end
     ########################################################################################
     
@@ -167,7 +253,23 @@ module Civitas
     ########################################################################################
     
     def hipotecar (ip)
+      result = false
       
+      if @encarcelado
+        return result
+      end
+      
+      if existe_la_propiedad(ip)
+        propiedad = @propiedades[ip]
+        
+        result = propiedad.hipotecar(self)
+      end
+      
+      if result
+        Diario.instance.ocurre_evento("El jugador "+@nombre+ " hipoteca la propiedad "+ip)
+      end
+      
+      return result
     end
     ########################################################################################
     
@@ -438,3 +540,4 @@ module Civitas
 
   end
 end
+
