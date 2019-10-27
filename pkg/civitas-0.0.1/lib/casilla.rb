@@ -93,9 +93,19 @@ module Civitas
         Diario.instance.ocurre_evento(evento)
       end
       
-      # def recibe_jugador_calle (i_actual, todos)
-        
-      # end
+      def recibe_jugador_calle (i_actual, todos)
+        if jugador_correcto(i_actual, todos)
+          informe(i_actual, todos)
+          
+          jugador = todos[i_actual]
+          
+          if @titulo_propiedad.tiene_propietario
+            jugador.puede_comprar_casilla
+          else
+            @titulo_propiedad.tramitar_alquiler(jugador)
+          end
+        end
+      end
       
       def recibe_jugador_impuesto (i_actual, todos)
         if jugador_correcto(i_actual, todos)

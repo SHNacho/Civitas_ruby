@@ -182,6 +182,7 @@ module Civitas
         result = propiedad.hipotecar(self)
       end
       
+      
       if result
         Diario.instance.ocurre_evento("El jugador "+@nombre+ " hipoteca la propiedad "+ip)
       end
@@ -433,6 +434,7 @@ module Civitas
     attr_reader :saldo
     attr_reader :nombre
 
+    end
   end
-end
+
 

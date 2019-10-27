@@ -43,6 +43,34 @@ module Civitas
                 end
             end
         end
+        
+        def cancelar_hipoteca (ip)
+          return @jugadores[@indice_jugador_actual].cancelar_hipoteca(ip)
+        end
+        
+        def construir_casa (ip)
+          return @jugadores[@indice_jugador_actual].construir_casa(ip)
+        end
+        
+        def construir_hotel(ip)
+          return @jugadores[@indice_jugador_actual].construir_hotel(ip)
+        end
+        
+        def comprar
+          res = false
+          
+          jugador_actual = @jugadores[@indice_jugador_actual]
+          
+          num_casilla_actual = jugador_actual.num_casilla_actual
+          
+          casilla = @tablero.casilla(num_casilla_actual)
+          
+          titulo = casilla.titulo_propiedad
+          
+          res = jugador_actual.comprar(titulo)
+
+          return res
+        end
 
         def final_del_juego
             bancarrota = false
