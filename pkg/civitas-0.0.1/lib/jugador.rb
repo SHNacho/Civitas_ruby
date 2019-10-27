@@ -53,7 +53,62 @@ module Civitas
     end
     ########################################################################################
     
-<<<<<<< HEAD
+# encoding:utf-8
+
+require_relative 'diario.rb'
+
+module Civitas
+  class Jugador
+    
+    include Comparable
+    
+    @@casas_max       = 4
+    @@casas_por_hotel = 4
+    @@hoteles_max     = 4
+    @@paso_por_salida = 1000
+    @@precio_libertad = 200
+    @@saldo_inicial   = 7500
+    
+    
+    attr_reader :casas_por_hotel
+    attr_reader :num_casilla_actual
+    attr_reader :puede_comprar
+    attr_reader :encarcelado
+    
+    ########################################################################################
+    
+    def initialize (nombre, otro=nil)
+      if otro == nil
+        @nombre             = nombre
+        @encarcelado        = false
+        @num_casilla_actual = 0
+        @puede_comprar      = true
+        @saldo              = @@saldo_inicial
+        @salvoconducto      = nil
+        @propiedades        = []
+      else
+        @nombre             = otro.nombre
+        @encarcelado        = otro.encarcelado
+        @num_casilla_actual = otro.num_casilla_actual
+        @puede_comprar      = otro.puede_comprar
+        @saldo              = otro.saldo
+        @salvoconducto      = otro.salvoconducto
+        @propiedades        = otro.propiedades
+      end
+    end
+    ########################################################################################
+
+    def self.new_jugador(nombre)
+      new(nombre)
+    end
+    ########################################################################################
+
+    def self.new_copy(otro)
+      new(nil, otro)
+    end
+    ########################################################################################
+    
+
     protected
     def self.new_copia (otro)
         new("", otro)
@@ -65,7 +120,11 @@ module Civitas
     ########################################################################################
 
     #===================================MÉTODOS PÚBLICOS===================================#
->>>>>>> origin/master
+    private_class_method :new
+
+    ########################################################################################
+
+    #===================================MÉTODOS PÚBLICOS===================================#
     public
     
     def cancelar_hipoteca (ip)
@@ -474,7 +533,7 @@ module Civitas
     end
     ########################################################################################
 
-    public
+    protected
     attr_reader :propiedades
     attr_reader :saldo
     attr_reader :nombre

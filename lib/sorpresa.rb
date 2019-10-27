@@ -136,6 +136,7 @@ module Civitas
 
     def aplicar_a_jugador_ir_carcel(actual, todos)
       if jugador_correcto(actual, todos)
+        informe(actual, todos)
         casilla = @tablero.num_casilla_carcel
         todos[actual].encarcelar(casilla)
       end
@@ -154,11 +155,7 @@ module Civitas
         casilla.recibe_jugador(actual, todos)
       end
     end
-
-
-
-
-
+    
     private_class_method :new
   end
 end

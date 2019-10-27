@@ -4,9 +4,17 @@
     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
+
         {
-            "pathToRDebugIDE": "/home/nacho/.rvm/gems/ruby-2.6.3/bin",
             "name": "Debug Local File",
+            "type": "Ruby",
+            "request": "launch",
+            "program": "${file}"
+        },
+
+        {
+            //"pathToRDebugIDE": "/home/nacho/.rvm/gems/ruby-2.6.3/bin",
+            "name": "Debug main",
             "type": "Ruby",
             "request": "launch",
             "program": "/mnt/sdb/Universidad/prácticas_PDOO/Civitas_ruby/lib/main.rb"

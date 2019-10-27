@@ -45,7 +45,18 @@ module Civitas
       public
       
       def recibe_jugador (i_actual, todos)
-        
+        case @tipo
+        when TipoCasilla::CALLE
+          recibe_jugador_calle(i_actual, todos)
+        when TipoCasilla::IMPUESTO
+          recibe_jugador_impuesto(i_actual, todos)
+        when TipoCasilla::JUEZ
+          recibe_jugador_juez(i_actual, todos)
+        when TipoCasilla::SORPRESA
+          recibe_jugador_sorpresa(i_actual, todos)
+        else
+          informe(i_actual, todos)
+        end
       end
       
       def jugador_correcto (i_actual, todos)
@@ -102,11 +113,5 @@ module Civitas
       # def recibe_jugador_sorpresa (i_actual, todos)
         
       # end
-
-      public
-      def main(jugadores)
-        informe(1, jugadores)
-        recibe_jugador_juez(1, jugadores)
-      end
   end
 end

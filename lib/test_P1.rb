@@ -1,3 +1,10 @@
+require_relative 'dado.rb'
+require_relative 'enum.rb'
+require_relative 'tablero.rb'
+require_relative 'mazo_sorpresas.rb'
+require_relative 'casilla.rb'
+require_relative 'sorpresa.rb'
+
 module Civitas
      # A continuación vamos a llamar 100 veces al método quien empieza
   
