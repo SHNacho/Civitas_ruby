@@ -10,5 +10,4 @@ require_relative 'diario.rb'
 module Civitas
   nombres = ["Nacho", "Julio"]
   puts "Hola"
-  #locooo
 end
