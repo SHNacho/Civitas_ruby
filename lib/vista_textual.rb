@@ -71,7 +71,7 @@ module Civitas
   
       opcion = menu("Elige la forma para intentar salir de la carcel",
                     lista["Pagando", "Tirando el dado"])
-      return (lista_SalidasCarcel[opcion])
+      return (lista_salidas_carcel[opcion])
     end
 
     
@@ -79,14 +79,14 @@ module Civitas
       opcion = menu("¿Quieres comprar esta calle?",
                     lista["SI", "NO"])
       
-      return (lista_Respuestas[opcion])
+      return (lista_respuestas[opcion])
     end
 
     def gestionar
       @i_gestion = menu("¿Qué gestión inmoviliaria quieres hacer?",
                     lista["VENDER", "HIPOTECAR", "CANCELAR HIPOTECA",
                           "CONSTRUIR CASA", "CONSTRUIR HOTEL", "TERMINAR"] )
-      #Falta por hacer que pregute sobre que propiedad quiere hacer la gestión
+      #Falta por hacer que pregunte sobre que propiedad quiere hacer la gestión
     end
 
     def getGestion
