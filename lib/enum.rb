@@ -56,6 +56,7 @@ module Civitas
         CANCELAR_HIPOTECA, CONSTRUIR_CASA,
         CONSTRUIR_HOTEL, TERMINAR]
     end
+<<<<<<< HEAD
     
     #DECLARACIÓN DE LOS CONTENEDORES
     
@@ -64,4 +65,6 @@ module Civitas
     
     
     
+=======
+>>>>>>> dc96628c69b3c090c3bb8356822bfd1d20e24265
 end

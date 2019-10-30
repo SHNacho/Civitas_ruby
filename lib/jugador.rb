@@ -72,6 +72,7 @@ module Civitas
             end
           end
       end
+      return result;
     end
     
     def cantidad_casas_hoteles
@@ -88,7 +89,7 @@ module Civitas
       
       if @encarcelado
         return result
-      else
+      end
         
         if @puede_comprar
           precio = titulo.precio_compra
@@ -101,7 +102,6 @@ module Civitas
             @puede_comprar = false
           end
         end
-      end
       
       return result 
     end

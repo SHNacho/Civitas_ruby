@@ -58,6 +58,9 @@ module Civitas
       lista_gestiones[VENDER,HIPOTECAR, CANCELAR_HIPOTECA, CONSTRUIR_CASA,
                       CONSTRUIR_HOTEL, TERMINAR]
     end
+<<<<<<< HEAD
     
 
+=======
+>>>>>>> dc96628c69b3c090c3bb8356822bfd1d20e24265
 end
