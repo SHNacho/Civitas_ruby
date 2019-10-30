@@ -38,7 +38,7 @@ module Civitas
   casilla5 = Casilla.new_sorpresa(mazo, "Sorpresa")
 
 
-  puts casilla3.to_string
+  puts casilla3.to_s
 
   jugadores = [Jugador.new_jugador("Julius"), Jugador.new_jugador("Nacho"), Jugador.new_jugador("Otro"), Jugador.new_jugador("Pepe")]
 
@@ -51,10 +51,10 @@ module Civitas
   juego.test
 
   jugadores[0].test
-  puts jugadores[0].to_string
+  puts jugadores[0].to_s
 
   titulo = Titulo_propiedad.new("Titulo", 10, 10, 10, 10, 10)
-  puts titulo.to_string
+  puts titulo.to_s
 
     
 end

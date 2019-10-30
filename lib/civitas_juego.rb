@@ -72,6 +72,10 @@ module Civitas
           return res
         end
 
+        def hipotecar(ip)
+            @jugadores[@indice_jugador_actual].hipotecar(ip)
+        end
+
         def final_del_juego
             bancarrota = false
             i = 0
@@ -80,6 +84,7 @@ module Civitas
                 if @jugadores[i].en_bancarrota
                     bancarrota = true
                 end
+                i += 1
             end
 
             return bancarrota
@@ -120,7 +125,7 @@ module Civitas
                 pasar_turno
                 siguiente_paso_completado(operacion)
             elsif operacion == Operaciones_juego::AVANZAR
-                avanzar_jugador
+                avanza_jugador
                 siguiente_paso_completado(operacion)
             end
         end
@@ -164,6 +169,8 @@ module Civitas
         end
 
         def inicializar_tablero(mazo)
+
+            @tablero.añade_casilla(Casilla.new_calle())
             
             @tablero.añade_juez
             @tablero.añade_casilla(Casilla.new_descanso("Descanso"))

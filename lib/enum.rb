@@ -35,6 +35,8 @@ module Civitas
     module Salidas_carcel
       PAGANDO = :pagando
       TIRANDO = :tirando
+
+      lista_salidas_carcel = [PAGANDO, TIRANDO]
     end
     
     module Respuestas
@@ -56,15 +58,4 @@ module Civitas
         CANCELAR_HIPOTECA, CONSTRUIR_CASA,
         CONSTRUIR_HOTEL, TERMINAR]
     end
-<<<<<<< HEAD
-    
-    #DECLARACIÓN DE LOS CONTENEDORES
-    
-    
-    
-    
-    
-    
-=======
->>>>>>> dc96628c69b3c090c3bb8356822bfd1d20e24265
 end
