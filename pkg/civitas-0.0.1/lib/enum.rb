@@ -35,11 +35,16 @@ module Civitas
     module Salidas_carcel
       PAGANDO = :pagando
       TIRANDO = :tirando
+
+      lista_salidas_carcel[PAGANDO,TIRANDO]
+      end
     end
     
     module Respuestas
       SI = :si
       NO = :no
+
+      lista_respuestas[NO,SI]
     end
       
     module Gestiones_inmobiliarias
@@ -48,16 +53,11 @@ module Civitas
       CANCELAR_HIPOTECA = :cancelar_hipoteca
       CONSTRUIR_CASA    = :construir_casa
       CONSTRUIR_HOTEL   = :construir_hotel
-      TERMINAR          = :terminar 
+      TERMINAR          = :terminar
+
+      lista_gestiones[VENDER,HIPOTECAR, CANCELAR_HIPOTECA, CONSTRUIR_CASA,
+                      CONSTRUIR_HOTEL, TERMINAR]
     end
     
-    #DECLARACIÓN DE LOS CONTENEDORES
-    
-    lista_respuestas[Respuestas::NO,RESPUESTAS::SI]
-    
-    lista_salidas_carcel[Salidas_carcel::PAGANDO,Salidas_carcel::TIRANDO]
-    
-    lista_gestiones[Gestiones_inmobiliarias::VENDER,Gestiones_inmobiliarias::HIPOTECAR,
-                    Gestiones_inmobiliarias::CANCELAR_HIPOTECA, Gestiones_inmobiliarias::CONSTRUIR_CASA,
-                    Gestiones_inmobiliarias::CONSTRUIR_HOTEL, Gestiones_inmobiliarias::TERMINAR]
+
 end

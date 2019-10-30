@@ -70,23 +70,24 @@ module Civitas
     def salir_carcel
   
       opcion = menu("Elige la forma para intentar salir de la carcel",
-                    lista["Pagando", "Tirando el dado"])
+                    lista = ["Pagando", "Tirando el dado"])
       return (lista_salidas_carcel[opcion])
     end
 
     
     def comprar
       opcion = menu("¿Quieres comprar esta calle?",
-                    lista["SI", "NO"])
+                    lista = ["SI", "NO"])
       
       return (lista_respuestas[opcion])
     end
 
     def gestionar
       @i_gestion = menu("¿Qué gestión inmoviliaria quieres hacer?",
-                    lista["VENDER", "HIPOTECAR", "CANCELAR HIPOTECA",
+                    lista = ["VENDER", "HIPOTECAR", "CANCELAR HIPOTECA",
                           "CONSTRUIR CASA", "CONSTRUIR HOTEL", "TERMINAR"] )
-      #Falta por hacer que pregunte sobre que propiedad quiere hacer la gestión
+      @i_propiedad = menu("¿Sobre qué propiedad quieres hacer la gestión?",
+                      @juegoModel.get_jugador_actual.list_propiedades_str)
     end
 
     def getGestion

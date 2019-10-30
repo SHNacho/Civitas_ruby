@@ -344,6 +344,16 @@ module Civitas
 
         return str
     end
+
+    def list_propiedades_str
+      arr = []
+      for propiedad in @propiedades
+        str = propiedad.nombre
+        arr << str
+      end
+
+      return arr
+    end
     
     private
 
