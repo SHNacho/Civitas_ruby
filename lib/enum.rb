@@ -50,14 +50,4 @@ module Civitas
       CONSTRUIR_HOTEL   = :construir_hotel
       TERMINAR          = :terminar 
     end
-    
-    #DECLARACIÓN DE LOS CONTENEDORES
-    
-    lista_respuestas[Respuestas::NO,RESPUESTAS::SI]
-    
-    lista_salidas_carcel[Salidas_carcel::PAGANDO,Salidas_carcel::TIRANDO]
-    
-    lista_gestiones[Gestiones_inmobiliarias::VENDER,Gestiones_inmobiliarias::HIPOTECAR,
-                    Gestiones_inmobiliarias::CANCELAR_HIPOTECA, Gestiones_inmobiliarias::CONSTRUIR_CASA,
-                    Gestiones_inmobiliarias::CONSTRUIR_HOTEL, Gestiones_inmobiliarias::TERMINAR]
 end
