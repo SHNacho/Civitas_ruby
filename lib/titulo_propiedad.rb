@@ -123,7 +123,7 @@ module Civitas
     end
 
     def tiene_propietario
-      tiene = false
+      tiene = falsehipotecar
       
       if @propietario != nil
         tiene = true
@@ -153,7 +153,7 @@ module Civitas
         return vendida
     end
 
-    def to_string
+    def to_s
         nombre_propietario = "Sin propietario"
         hipotecado_str     = "No"
 

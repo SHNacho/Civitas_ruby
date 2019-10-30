@@ -4,7 +4,7 @@
 
 
 require_relative 'vista_textual.rb'
-require_relative 'civitas_jugo.rb'
+require_relative 'civitas_juego.rb'
 require_relative 'enum.rb'
 require_relative 'operacion_inmobiliaria.rb'
 
@@ -22,16 +22,12 @@ module Civitas
         @vista.actualizarVista
         
         @vista.pausa
-        
         operacion = @juego.siguiente_paso
-        
         @vista.mostrarSiguienteOperacion(operacion)
         
         if operacion != Operaciones_juego::PASAR_TURNO
           @vista.mostrarEventos
         end
-        
-        @juego.final_del_juego
         
         if !@juego.final_del_juego
           
@@ -55,7 +51,7 @@ module Civitas
                 when Gestiones_inmobiliarias::VENDER
                   @juego.vender(propiedad)
                 when Gestiones_inmobiliarias::HIPOTECAR
-                  @juego.vender(propiedad)
+                  @juego.hipotecar(propiedad)
                 when Gestiones_inmobiliarias::CANCELAR_HIPOTECA
                   @juego.cancelar_hipoteca(propiedad)
                 when Gestiones_inmobiliarias::CONSTRUIR_CASA

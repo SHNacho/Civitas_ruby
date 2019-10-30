@@ -35,6 +35,8 @@ module Civitas
     module Salidas_carcel
       PAGANDO = :pagando
       TIRANDO = :tirando
+
+      lista_salidas_carcel = [PAGANDO, TIRANDO]
     end
     
     module Respuestas

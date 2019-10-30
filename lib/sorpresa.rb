@@ -28,7 +28,7 @@ module Civitas
       new(tipo, nil, valor, texto, nil)
     end
 
-    def to_string
+    def to_s
       str = @tipo.to_s + "\n" + @texto
       return str
     end
