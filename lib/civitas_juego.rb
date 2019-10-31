@@ -158,7 +158,7 @@ module Civitas
           jugador_actual.mover_a_casilla(posicion_nueva)
           
           casilla.recibe_jugador(@indice_jugador_actual,@jugadores)
-          
+
           contabilizar_pasos_por_salida(jugador_actual)
         end
 
