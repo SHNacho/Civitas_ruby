@@ -45,7 +45,6 @@ module Civitas
       public
       
       def recibe_jugador (i_actual, todos)
-
         case @tipo
         when TipoCasilla::CALLE
           recibe_jugador_calle(i_actual, todos)
@@ -70,7 +69,7 @@ module Civitas
         return correcto
       end
       
-      def to_string
+      def to_s
         str = "CASILLA: \n" + "Nombre:    " + @nombre + "\n" +
               "Tipo:    " + @tipo.to_s + "\n"
         
@@ -87,25 +86,23 @@ module Civitas
       private
       
       def informe (i_actual, todos)
-        evento = (#"El jugador " + todos[i_actual].nombre + 
+        evento = ("El jugador " + i_actual.to_s + 
                  " ha caido en la casilla " + @nombre + "\n" +
-                 " Informacion de la casilla: " + to_string)
+                 " Informacion de la casilla: \n" + to_s)
         Diario.instance.ocurre_evento(evento)
       end
       
-      def recibe_jugador_calle (i_actual, todos)
+     def recibe_jugador_calle (i_actual, todos)
         if jugador_correcto(i_actual, todos)
           informe(i_actual, todos)
-          
           jugador = todos[i_actual]
-          
-          if @titulo_propiedad.tiene_propietario
+          if !@titulo_propiedad.tiene_propietario
             jugador.puede_comprar_casilla
           else
             @titulo_propiedad.tramitar_alquiler(jugador)
           end
         end
-      end
+     end
       
       def recibe_jugador_impuesto (i_actual, todos)
         if jugador_correcto(i_actual, todos)
@@ -121,8 +118,12 @@ module Civitas
         end
       end
       
-      # def recibe_jugador_sorpresa (i_actual, todos)
-        
-      # end
+      def recibe_jugador_sorpresa (i_actual, todos)
+        if jugador_correcto(i_actual, todos)
+          @sorpresa = @mazo.siguiente
+          informe(i_actual,todos)
+          @sorpresa.aplicar_a_jugador(i_actual, todos)
+        end
+      end
   end
 end
