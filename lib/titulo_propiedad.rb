@@ -6,20 +6,12 @@ module Civitas
 
     @@factor_intereses_hipoteca = 1.1
     
-    
-    
     attr_reader :propietario
-    
     attr_reader :nombre
-    
     attr_reader :num_casas
-    
     attr_reader :num_hoteles
-    
     attr_reader :precio_compra
-    
     attr_reader :precio_edificar     
-    
     attr_reader :hipotecado
 
     def initialize (nom, ab, fr, hb, pc, pe)
