@@ -104,8 +104,13 @@ module Civitas
       return operacion
     end
 
+    def get_importe_hipoteca
+      importeHipoteca = (@hipoteca_base*(1+(@num_casas*0.5)+(@num_hoteles*2.5)))
+      return importeHipoteca
+    end
+
     def get_importe_cancelar_hipoteca 
-      importe = @hipoteca_base * @@factor_intereses_hipoteca
+      importe = get_importe_hipoteca * @@factor_intereses_hipoteca
       return importe
     end
 
@@ -113,8 +118,7 @@ module Civitas
       operacion = false
 
       if !@hipotecado && es_este_el_propietario(jugador)
-        cantidad_recibida = (@hipoteca_base*(1+(@num_casas*0.5)+(@num_hoteles*2.5)))
-        jugador.recibe(cantidad_recibida)
+        jugador.recibe(get_importe_hipoteca)
         @hipotecado = true
         operacion = true
       end
@@ -166,17 +170,19 @@ module Civitas
           end
 
 
-          str = "TituloPropiedad" + "\n" +
-                      "-Nombre:                   " + @nombre + "\n" +
-                      "-Precio base de alquiler:  " + @alquiler_base.to_s + "\n" +
-                      "-Factor de revalorización: " + @factor_revalorizacion.to_s + "\n" +
-                      "-Hipoteca base:            " + @hipoteca_base.to_s + "\n" +
-                      "-Precio de compra:         " + @precio_compra.to_s + "\n" +
-                      "-Precio de edificar:       " + @precio_edificar.to_s + "\n" +
-                      "-Propietario:              " + nombre_propietario + "\n" +
-                      "-Hipotecado:               " + hipotecado_str + "\n" +
-                      "-Numero de casas:          " + @num_casas.to_s + "\n" +
-                      "-Numero de hoteles:        " + @num_hoteles.to_s + "\n"
+          # str = "TituloPropiedad" + "\n" +
+          #             "-Nombre:                   " + @nombre + "\n" +
+          #             "-Precio base de alquiler:  " + @alquiler_base.to_s + "\n" +
+          #             "-Factor de revalorización: " + @factor_revalorizacion.to_s + "\n" +
+          #             "-Hipoteca base:            " + @hipoteca_base.to_s + "\n" +
+          #             "-Precio de compra:         " + @precio_compra.to_s + "\n" +
+          #             "-Precio de edificar:       " + @precio_edificar.to_s + "\n" +
+          #             "-Propietario:              " + nombre_propietario + "\n" +
+          #             "-Hipotecado:               " + hipotecado_str + "\n" +
+          #             "-Numero de casas:          " + @num_casas.to_s + "\n" +
+          #             "-Numero de hoteles:        " + @num_hoteles.to_s + "\n"
+
+          str = @nombre
 
           return str
     end
