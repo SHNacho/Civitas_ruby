@@ -37,8 +37,8 @@ module Civitas
             when Operaciones_juego::GESTIONAR
               @vista.gestionar
               
-              gestion = @vista.gestion
-              propiedad = @vista.propiedad
+              gestion = @vista.getGestion
+              propiedad = @vista.getPropiedad
               
               operacion_inm = Operacion_inmobiliaria.new(gestion, propiedad)
               
