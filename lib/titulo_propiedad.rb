@@ -123,7 +123,7 @@ module Civitas
     end
 
     def tiene_propietario
-      tiene = falsehipotecar
+      tiene = false
       
       if @propietario != nil
         tiene = true
