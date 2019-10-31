@@ -74,10 +74,12 @@ module Civitas
               "Tipo:    " + @tipo.to_s + "\n"
         
         case @tipo
-          when TipoCasilla::IMPUESTO
-            str+="Importe:    " + @importe.to_s + "\n"
-          when TipoCasilla::JUEZ
-            str+="Casilla carcel:    " + @@carcel.to_s
+        when TipoCasilla::CALLE
+          str+="Precio:     " + @titulo_propiedad.precio_compra.to_s
+        when TipoCasilla::IMPUESTO
+          str+="Importe:    " + @importe.to_s + "\n"
+        when TipoCasilla::JUEZ
+          str+="Casilla carcel:    " + @@carcel.to_s
         end
         
         return str
