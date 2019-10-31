@@ -154,7 +154,7 @@ module Civitas
         nombre_propietario = "Sin propietario"
         hipotecado_str     = "No"
 
-          if @hipotecado==true
+          if @hipotecado==true  
               hipotecado_str = "Si"
           end
 
