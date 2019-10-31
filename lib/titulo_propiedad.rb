@@ -53,7 +53,8 @@ module Civitas
       comprada = false
       
       if !tiene_propietario
-        jugador.paga(@propietario = jugador)
+        @propietario = jugador
+        jugador.paga(@precio_compra)
         comprada = true
       end
       

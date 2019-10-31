@@ -97,7 +97,7 @@ module Civitas
             result = titulo.comprar(self)
             if result
               @propiedades << titulo
-              Diario.instance.ocurre_evento("El jugador " + self + " compra la propiedad " + titulo.to_s)
+              Diario.instance.ocurre_evento("El jugador " + @nombre + " compra la propiedad " + titulo.to_s)
             end
             @puede_comprar = false
           end
