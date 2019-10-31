@@ -71,7 +71,7 @@ module Civitas
   
       opcion = menu("Elige la forma para intentar salir de la carcel",
                     lista = ["Pagando", "Tirando el dado"])
-      return (Salidas_carcel::lista_salidas_carcel[opcion])
+      return (Salidas_carcel::LISTA_SALIDAS_CARCEL[opcion])
     end
 
     
@@ -79,7 +79,7 @@ module Civitas
       opcion = menu("¿Quieres comprar esta calle?",
                     lista = ["SI", "NO"])
       
-      return (Respuestas::lista_respuestas[opcion])
+      return (Respuestas::LISTA_RESPUESTAS[opcion])
     end
 
     def gestionar
