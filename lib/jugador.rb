@@ -227,7 +227,7 @@ module Civitas
     end
     
     def paga (cantidad)
-      return (modificar_saldo(cantidad * -1))
+      return (modificar_saldo(cantidad*(-1)))
     end
     
     def paga_alquiler (cantidad)

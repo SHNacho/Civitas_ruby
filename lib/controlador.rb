@@ -32,8 +32,8 @@ module Civitas
               
               if respuesta == Respuestas::SI
                 @juego.comprar
-                @juego.siguiente_paso_completado(operacion)
               end
+                @juego.siguiente_paso_completado(operacion)
             when Operaciones_juego::GESTIONAR
               @vista.gestionar
               
@@ -56,16 +56,16 @@ module Civitas
                 when Gestiones_inmobiliarias::TERMINAR
                   @juego.siguiente_paso_completado(operacion)
               end
-            when Operaciones_juego::SALIR_CARCEL
-              salida = @vista.salir_carcel
+                when Operaciones_juego::SALIR_CARCEL
+                  salida = @vista.salir_carcel
               
-              if salida == lista_SalidasCarcel[0]
-                @juego.salir_carcel_pagando
-              else
-                @juego.salir_carcel_tirando
-              end
+                  if salida == lista_SalidasCarcel[0]
+                    @juego.salir_carcel_pagando
+                  else
+                  @juego.salir_carcel_tirando
+                  end
               
-            @juego.siguiente_paso_completado(operacion)
+                  @juego.siguiente_paso_completado(operacion)
           end
         end
       end
