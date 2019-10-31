@@ -129,6 +129,8 @@ module Civitas
                 avanza_jugador
                 siguiente_paso_completado(operacion)
             end
+
+            return operacion
         end
 
         def vender(ip)

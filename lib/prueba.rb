@@ -4,8 +4,8 @@
 
 require_relative 'vista_textual.rb'
 require_relative 'controlador.rb'
-require_relatove 'dado.rb'
-requiree_relative 'civitas_juego.rb'
+require_relative 'dado.rb'
+require_relative 'civitas_juego.rb'
 
 module Civitas
   class Prueba
