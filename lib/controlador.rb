@@ -30,7 +30,7 @@ module Civitas
             when Operaciones_juego::COMPRAR
               respuesta = @vista.comprar
               
-              if respuesta == Respuesta::SI
+              if respuesta == Respuestas::SI
                 @juego.comprar
                 @juego.siguiente_paso_completado(operacion)
               end

@@ -36,14 +36,14 @@ module Civitas
       PAGANDO = :pagando
       TIRANDO = :tirando
 
-      lista_salidas_carcel = [PAGANDO, TIRANDO]
+      LISTA_SALIDAS_CARCEL = [PAGANDO, TIRANDO]
     end
     
     module Respuestas
       SI = :si
       NO = :no
 
-      lista_respuestas = [NO, SI]
+      LISTA_RESPUESTAS = [NO, SI]
     end
       
     module Gestiones_inmobiliarias
@@ -54,8 +54,7 @@ module Civitas
       CONSTRUIR_HOTEL   = :construir_hotel
       TERMINAR          = :terminar
 
-      lista_gestiones = [VENDER,HIPOTECAR,
-        CANCELAR_HIPOTECA, CONSTRUIR_CASA,
-        CONSTRUIR_HOTEL, TERMINAR]
+      LISTA_GESTIONES = [VENDER, HIPOTECAR, CANCELAR_HIPOTECA, CONSTRUIR_CASA,
+                         CONSTRUIR_HOTEL, TERMINAR]
     end
 end
