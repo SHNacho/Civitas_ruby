@@ -12,4 +12,5 @@ module Civitas
         controlador = Controlador.new(juego, vista)
         controlador.juega
     end
-end
+
+ end

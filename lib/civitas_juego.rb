@@ -159,14 +159,26 @@ module Civitas
           jugador_actual.mover_a_casilla(posicion_nueva)
           
           casilla.recibe_jugador(@indice_jugador_actual,@jugadores)
-          
+
           contabilizar_pasos_por_salida(jugador_actual)
         end
 
         def inicializar_mazo_sorpresas(tablero)
             @mazo.al_mazo(Sorpresa.new_ircarcel(TipoSorpresa::IRCARCEL, tablero))
-            @mazo.al_mazo(Sorpresa.new_ircasilla(TipoSorpresa::IRCASILLA, tablero, 5, "Ir a casilla 5"))
-            @mazo.al_mazo(Sorpresa.new_sorpresa(TipoSorpresa::PORCASAHOTEL, 10, "Por casa hotel"))
+            @mazo.al_mazo(Sorpresa.new_ircasilla(TipoSorpresa::IRCASILLA, tablero,
+                                                 7, "Ve a la casilla 7"))
+            @mazo.al_mazo(Sorpresa.new_ircasilla(TipoSorpresa::IRCASILLA, tablero,
+                                                 14, "Ve a la casilla 14"))
+            @mazo.al_mazo(Sorpresa.new_sorpresa(TipoSorpresa::PORCASAHOTEL, 50,
+                                                "Cobra 50 por cada propiedad"))
+            @mazo.al_mazo(Sorpresa.new_sorpresa(TipoSorpresa::PAGARCOBRAR, 200, "Cobra 200"))
+            @mazo.al_mazo(Sorpresa.new_sorpresa(TipoSorpresa::PAGARCOBRAR, -200, "Paga 200"))
+            @mazo.al_mazo(Sorpresa.new_sorpresa(TipoSorpresa::PORCASAHOTEL, -50, 
+                                                "Paga 50 por cada propiedad"))
+            @mazo.al_mazo(Sorpresa.new_salircarcel(TipoSorpresa::SALIRCARCEL, @mazo))
+            @mazo.al_mazo(Sorpresa.new_sorpresa(TipoSorpresa::PORJUGADOR, 50, "Recibe 50 de cada jugador"))
+            @mazo.al_mazo(Sorpresa.new_sorpresa(TipoSorpresa::PORJUGADOR, -50, "Paga 50 a cada jugador"))
+            
         end
 
         def inicializar_tablero(mazo)

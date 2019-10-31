@@ -13,7 +13,7 @@ module Civitas
     end
 
     def self.new_ircarcel(tipo, tablero)
-      new(tipo, tablero, -1, "Ir a la carcel", nil)
+      new(tipo, tablero, -1, "Ve a la carcel directamenete", nil)
     end
 
     def self.new_ircasilla(tipo, tablero, valor, texto)
@@ -21,7 +21,7 @@ module Civitas
     end
 
     def self.new_salircarcel(tipo, mazo)
-      new(tipo, nil, -1, "Salir de la carcel", mazo)
+      new(tipo, nil, -1, "Esta carta te permite salir de la carcel", mazo)
     end
 
     def self.new_sorpresa(tipo, valor, texto)

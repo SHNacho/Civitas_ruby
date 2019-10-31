@@ -4,5 +4,3 @@ CivitasJuego:
     -método inicializar_tablero e inicializar_mazo: Iniciarlos completamente
 Controlador:
     -Duda a la hora de mostrar la siguiente operación que se va a realizar
-VistaTextual:
-    -Duda en el método gestionar a la hora de preguntar la propiedad que gestionar
