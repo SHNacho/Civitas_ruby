@@ -43,7 +43,7 @@ module Civitas
       SI = :si
       NO = :no
 
-      LISTA_RESPUESTAS = [NO, SI]
+      LISTA_RESPUESTAS = [SI, NO]
     end
       
     module Gestiones_inmobiliarias

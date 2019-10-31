@@ -69,9 +69,10 @@ module Civitas
           end
         end
       end
-            if @juego.final_del_juego
-              @juego.ranking
-            end
+      
+      if @juego.final_del_juego
+        @juego.ranking
+      end
     end
   end
 end
