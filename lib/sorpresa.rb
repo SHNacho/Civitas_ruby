@@ -29,7 +29,7 @@ module Civitas
     end
 
     def to_s
-      str = @tipo.to_s + "\n" + @texto
+      str = "'" + @tipo.to_s + ": " + @texto + "'"
       return str
     end
 
@@ -52,7 +52,7 @@ module Civitas
     def informe(actual, todos)
       diario = Diario.instance 
       if (jugador_correcto(actual, todos))
-        str = "Se aplica Sorpresa a " + todos[actual].nombre
+        str = "Se aplica la sorpresa:" + to_s + " a " + todos[actual].nombre
         diario.ocurre_evento(str)
       end
     end
@@ -115,14 +115,14 @@ module Civitas
       end
     end
 
-    def aplicar_jugador_por_casa_hotel
+    def aplicar_jugador_por_casa_hotel(actual, todos)
       if jugador_correcto(actual, todos)
 
         informe(actual, todos)
 
-        saldo = @valor * todos[actual].cantidad_casas_hoteles
+        incremento = @valor * todos[actual].cantidad_casas_hoteles
 
-        todos[actual].modificar_saldo(@valor)
+        todos[actual].modificar_saldo(incremento)
 
       end
     end
@@ -148,9 +148,9 @@ module Civitas
         casilla_actual = todos[actual].num_casilla_actual
 
         tirada = @tablero.calcular_tirada(casilla_actual, @valor)
-        nuevaPos = @tablero.nueva_posicion(actual, tirada)
+        nuevaPos = @tablero.nueva_posicion(casilla_actual, tirada)
 
-        todos[actual].mover_a_casilla(nuevaPos)
+        todos[actual].mover_a_casilla(@valor)
         casilla = @tablero.casilla(@valor)
         casilla.recibe_jugador(actual, todos)
       end

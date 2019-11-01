@@ -168,7 +168,7 @@ module Civitas
         def inicializar_mazo_sorpresas(tablero)
             @mazo.al_mazo(Sorpresa.new_ircarcel(TipoSorpresa::IRCARCEL, tablero))
             @mazo.al_mazo(Sorpresa.new_ircasilla(TipoSorpresa::IRCASILLA, tablero,
-                                                 7, "Ve a la casilla 7"))
+                                                 3, "Ve a la casilla 3"))
             @mazo.al_mazo(Sorpresa.new_ircasilla(TipoSorpresa::IRCASILLA, tablero,
                                                  14, "Ve a la casilla 14"))
             @mazo.al_mazo(Sorpresa.new_sorpresa(TipoSorpresa::PORCASAHOTEL, 50,

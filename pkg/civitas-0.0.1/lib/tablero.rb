@@ -62,7 +62,7 @@ module Civitas
     def nueva_posicion(actual, tirada)
       posicion = actual + tirada
       ultima_casilla = @casillas.size
-      if posicion > ultima_casilla
+      if posicion >= ultima_casilla
         posicion = posicion % ultima_casilla
         @por_salida += 1
       end

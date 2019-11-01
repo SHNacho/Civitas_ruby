@@ -22,7 +22,7 @@ module Civitas
     
     
     def initialize (nombre, otro=nil)
-      if otro == nil
+      if otro.nil?
         @nombre             = nombre
         @encarcelado        = false
         @num_casilla_actual = 0
@@ -142,8 +142,8 @@ module Civitas
         if puedoEdificarHotel
           result = propiedad.construir_hotel(self)
           propiedad.derruir_casas(@@casas_por_hotel, self)
+          Diario.instance.ocurre_evento("El jugador " + @nombre + " construye hotel en la propiedad " + ip.to_s)
         end
-        Diario.instance.ocurre_evento("El jugador " + @nombre + " construye hotel en la propiedad " + ip.to_s)
       end
       
       return result
@@ -184,7 +184,7 @@ module Civitas
       
       
       if result
-        Diario.instance.ocurre_evento("El jugador "+@nombre+ " hipoteca la propiedad "+ip)
+        Diario.instance.ocurre_evento("El jugador "+@nombre+ " hipoteca la propiedad "+ip.to_s)
       end
       
       return result
@@ -302,7 +302,7 @@ module Civitas
 
     
     def tiene_salvoconducto
-      return @salvoconducto != nil
+      return !@salvoconducto.nil?
     end
 
     

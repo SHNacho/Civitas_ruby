@@ -27,45 +27,48 @@ module Civitas
         if !@juego.final_del_juego
           
           case operacion
-            when Operaciones_juego::COMPRAR
-              respuesta = @vista.comprar
-              
-              if respuesta == Respuestas::SI
-                @juego.comprar
-              end
-                @juego.siguiente_paso_completado(operacion)
-            when Operaciones_juego::GESTIONAR
-              @vista.gestionar
-              
-              gestion = @vista.getGestion
-              propiedad = @vista.getPropiedad
-              
-              operacion_inm = Operacion_inmobiliaria.new(gestion, propiedad)
-              
-              case gestion
-                when Gestiones_inmobiliarias::VENDER
-                  @juego.vender(propiedad)
-                when Gestiones_inmobiliarias::HIPOTECAR
-                  @juego.hipotecar(propiedad)
-                when Gestiones_inmobiliarias::CANCELAR_HIPOTECA
-                  @juego.cancelar_hipoteca(propiedad)
-                when Gestiones_inmobiliarias::CONSTRUIR_CASA
-                  @juego.construir_casa(propiedad)
-                when Gestiones_inmobiliarias::CONSTRUIR_HOTEL
-                  @juego.construir_hotel(propiedad)
-                when Gestiones_inmobiliarias::TERMINAR
-                  @juego.siguiente_paso_completado(operacion)
-              end
-                when Operaciones_juego::SALIR_CARCEL
-                  salida = @vista.salir_carcel
-              
-                  if salida == lista_SalidasCarcel[0]
-                    @juego.salir_carcel_pagando
-                  else
-                  @juego.salir_carcel_tirando
-                  end
-              
-                  @juego.siguiente_paso_completado(operacion)
+
+          when Operaciones_juego::COMPRAR
+            # respuesta = @vista.comprar
+            
+            # if respuesta == Respuestas::SI
+            #   @juego.comprar
+            # end
+              @juego.siguiente_paso_completado(operacion)
+
+          when Operaciones_juego::GESTIONAR
+            @vista.gestionar
+            
+            gestion = @vista.getGestion
+            propiedad = @vista.getPropiedad
+            
+            operacion_inm = Operacion_inmobiliaria.new(gestion, propiedad)
+            
+            case Gestiones_inmobiliarias::LISTA_GESTIONES[gestion]
+            when Gestiones_inmobiliarias::VENDER
+              @juego.vender(propiedad)
+            when Gestiones_inmobiliarias::HIPOTECAR
+              @juego.hipotecar(propiedad)
+            when Gestiones_inmobiliarias::CANCELAR_HIPOTECA
+              @juego.cancelar_hipoteca(propiedad)
+            when Gestiones_inmobiliarias::CONSTRUIR_CASA
+              @juego.construir_casa(propiedad)
+            when Gestiones_inmobiliarias::CONSTRUIR_HOTEL
+              @juego.construir_hotel(propiedad)
+            when Gestiones_inmobiliarias::TERMINAR
+              @juego.siguiente_paso_completado(operacion)
+            end
+            
+          when Operaciones_juego::SALIR_CARCEL
+            salida = @vista.salir_carcel
+        
+            if salida == Salidas_carcel::PAGANDO
+              @juego.salir_carcel_pagando
+            else
+            @juego.salir_carcel_tirando
+            end
+        
+            @juego.siguiente_paso_completado(operacion)
           end
         end
       end
