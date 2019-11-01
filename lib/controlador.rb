@@ -42,9 +42,10 @@ module Civitas
             gestion = @vista.getGestion
             propiedad = @vista.getPropiedad
             
-            operacion_inm = Operacion_inmobiliaria.new(gestion, propiedad)
+            operacion_inm = Operacion_inmobiliaria.new(Gestiones_inmobiliarias::LISTA_GESTIONES[gestion],
+                                                       propiedad)
             
-            case Gestiones_inmobiliarias::LISTA_GESTIONES[gestion]
+            case operacion_inm.gestion
             when Gestiones_inmobiliarias::VENDER
               @juego.vender(propiedad)
             when Gestiones_inmobiliarias::HIPOTECAR
@@ -65,7 +66,7 @@ module Civitas
             if salida == Salidas_carcel::PAGANDO
               @juego.salir_carcel_pagando
             else
-            @juego.salir_carcel_tirando
+              @juego.salir_carcel_tirando
             end
         
             @juego.siguiente_paso_completado(operacion)
@@ -74,7 +75,7 @@ module Civitas
       end
       
       if @juego.final_del_juego
-        @juego.ranking
+        @juego.actualizar_info
       end
     end
   end

@@ -91,17 +91,17 @@ module Civitas
         return result
       end
         
-        if @puede_comprar
-          precio = titulo.precio_compra
-          if puedo_gastar(precio)
-            result = titulo.comprar(self)
-            if result
-              @propiedades << titulo
-              Diario.instance.ocurre_evento("El jugador " + @nombre + " compra la propiedad " + titulo.to_s)
-            end
-            @puede_comprar = false
+      if @puede_comprar
+        precio = titulo.precio_compra
+        if puedo_gastar(precio)
+          result = titulo.comprar(self)
+          if result
+            @propiedades << titulo
+            Diario.instance.ocurre_evento("El jugador " + @nombre + " compra la propiedad " + titulo.to_s)
           end
+          @puede_comprar = false
         end
+      end
       
       return result 
     end
@@ -208,7 +208,7 @@ module Civitas
         @puede_comprar = false
         evento = "El jugador " + @nombre + " se ha movido a la casilla numero "+ 
                   num_casilla.to_s
-                Diario.instance.ocurre_evento(evento)
+        Diario.instance.ocurre_evento(evento)
         puede_mover = true
       end
       
