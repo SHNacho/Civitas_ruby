@@ -334,14 +334,16 @@ module Civitas
         salvoconducto_str = (@salvoconducto == nil) ? "No" : "Sí"
         propiedades_str = @propiedades.size.to_s
         puede_comprar_str = @puede_comprar ? "Sí" : "No"
-        str =       "JUGADOR \n" +
+        str =        "-------------------------------------------\n" +
+                     "JUGADOR \n" +
                      "Nombre:         " + @nombre + "\n" + 
                      "Saldo:          " + @saldo.to_s + "\n" +
                      "Casilla actual: " + @num_casilla_actual.to_s + "\n" +
                      "Encarcelado:    " + encarcelado_str + "\n" +
                      "Salvoconducto:  " + salvoconducto_str + "\n" +
                      "Propiedades:    " + propiedades_str + "\n" +
-                     "Puede comprar   " + puede_comprar_str
+                     "Puede comprar   " + puede_comprar_str + "\n"
+                     "-------------------------------------------\n"
 
         return str
     end

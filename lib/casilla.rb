@@ -70,17 +70,20 @@ module Civitas
       end
       
       def to_s
-        str = "CASILLA: \n" + "Nombre:    " + @nombre + "\n" +
+        str = "-------------------------------------------\n" +
+              "CASILLA: \n" + "Nombre:    " + @nombre + "\n" +
               "Tipo:    " + @tipo.to_s + "\n"
         
         case @tipo
         when TipoCasilla::CALLE
-          str+="Precio:     " + @titulo_propiedad.precio_compra.to_s
+          str+="Precio:     " + @titulo_propiedad.precio_compra.to_s + "\n"
         when TipoCasilla::IMPUESTO
           str+="Importe:    " + @importe.to_s + "\n"
         when TipoCasilla::JUEZ
-          str+="Casilla carcel:    " + @@carcel.to_s
+          str+="Casilla carcel:    " + @@carcel.to_s + "\n"
         end
+
+        str += "-------------------------------------------\n"
         
         return str
       end

@@ -120,6 +120,7 @@ module Civitas
     def actualizarVista
       puts @juegoModel.info_jugador_texto
       puts @juegoModel.get_casilla_actual.to_s
+      puts "==========================================="
     end
 
     
