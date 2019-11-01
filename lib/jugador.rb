@@ -22,7 +22,7 @@ module Civitas
     
     
     def initialize (nombre, otro=nil)
-      if otro == nil
+      if otro.nil?
         @nombre             = nombre
         @encarcelado        = false
         @num_casilla_actual = 0
@@ -91,17 +91,17 @@ module Civitas
         return result
       end
         
-        if @puede_comprar
-          precio = titulo.precio_compra
-          if puedo_gastar(precio)
-            result = titulo.comprar(self)
-            if result
-              @propiedades << titulo
-              Diario.instance.ocurre_evento("El jugador " + @nombre + " compra la propiedad " + titulo.to_s)
-            end
-            @puede_comprar = false
+      if @puede_comprar
+        precio = titulo.precio_compra
+        if puedo_gastar(precio)
+          result = titulo.comprar(self)
+          if result
+            @propiedades << titulo
+            Diario.instance.ocurre_evento("El jugador " + @nombre + " compra la propiedad " + titulo.to_s)
           end
+          @puede_comprar = false
         end
+      end
       
       return result 
     end
@@ -142,8 +142,8 @@ module Civitas
         if puedoEdificarHotel
           result = propiedad.construir_hotel(self)
           propiedad.derruir_casas(@@casas_por_hotel, self)
+          Diario.instance.ocurre_evento("El jugador " + @nombre + " construye hotel en la propiedad " + ip.to_s)
         end
-        Diario.instance.ocurre_evento("El jugador " + @nombre + " construye hotel en la propiedad " + ip.to_s)
       end
       
       return result
@@ -184,7 +184,7 @@ module Civitas
       
       
       if result
-        Diario.instance.ocurre_evento("El jugador "+@nombre+ " hipoteca la propiedad "+ip)
+        Diario.instance.ocurre_evento("El jugador "+@nombre+ " hipoteca la propiedad "+ip.to_s)
       end
       
       return result
@@ -208,7 +208,7 @@ module Civitas
         @puede_comprar = false
         evento = "El jugador " + @nombre + " se ha movido a la casilla numero "+ 
                   num_casilla.to_s
-                Diario.instance.ocurre_evento(evento)
+        Diario.instance.ocurre_evento(evento)
         puede_mover = true
       end
       
@@ -302,7 +302,7 @@ module Civitas
 
     
     def tiene_salvoconducto
-      return @salvoconducto != nil
+      return !@salvoconducto.nil?
     end
 
     
@@ -314,9 +314,7 @@ module Civitas
                 if @propiedades[ip].vender(self)
                     puede_vender = true
                     @propiedades.delete_at(ip)
-                    evento = "El jugador " + @nombre 
-                                    + " ha vendido su propiedad " 
-                                    + ip.to_s
+                    evento = "El jugador " + @nombre + " ha vendido su propiedad " + ip.to_s
                     Diario.instance.ocurre_evento(evento)
                 end
             end
@@ -334,14 +332,16 @@ module Civitas
         salvoconducto_str = (@salvoconducto == nil) ? "No" : "Sí"
         propiedades_str = @propiedades.size.to_s
         puede_comprar_str = @puede_comprar ? "Sí" : "No"
-        str =       "JUGADOR \n" +
+        str =        "-------------------------------------------\n" +
+                     "JUGADOR \n" +
                      "Nombre:         " + @nombre + "\n" + 
                      "Saldo:          " + @saldo.to_s + "\n" +
                      "Casilla actual: " + @num_casilla_actual.to_s + "\n" +
                      "Encarcelado:    " + encarcelado_str + "\n" +
                      "Salvoconducto:  " + salvoconducto_str + "\n" +
                      "Propiedades:    " + propiedades_str + "\n" +
-                     "Puede comprar   " + puede_comprar_str
+                     "Puede comprar   " + puede_comprar_str + "\n"
+                     "-------------------------------------------\n"
 
         return str
     end

@@ -131,8 +131,8 @@ module Civitas
 
     def tramitar_alquiler (jugador)
       if tiene_propietario && !es_este_el_propietario(jugador)
-        jugador.paga_alquiler(@alquiler_base)
-        @propietario.recibe(@alquiler_base)
+        jugador.paga_alquiler(get_precio_alquiler)
+        @propietario.recibe(get_precio_alquiler)
       end
     end
 

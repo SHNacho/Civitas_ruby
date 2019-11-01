@@ -70,17 +70,20 @@ module Civitas
       end
       
       def to_s
-        str = "CASILLA: \n" + "Nombre:    " + @nombre + "\n" +
+        str = "-------------------------------------------\n" +
+              "CASILLA: \n" + "Nombre:    " + @nombre + "\n" +
               "Tipo:    " + @tipo.to_s + "\n"
         
         case @tipo
         when TipoCasilla::CALLE
-          str+="Precio:     " + @titulo_propiedad.precio_compra.to_s
+          str+="Precio:     " + @titulo_propiedad.precio_compra.to_s + "\n"
         when TipoCasilla::IMPUESTO
           str+="Importe:    " + @importe.to_s + "\n"
         when TipoCasilla::JUEZ
-          str+="Casilla carcel:    " + @@carcel.to_s
+          str+="Casilla carcel:    " + @@carcel.to_s + "\n"
         end
+
+        str += "-------------------------------------------\n"
         
         return str
       end
@@ -90,11 +93,11 @@ module Civitas
       def informe (i_actual, todos)
         evento = ("El jugador " + i_actual.to_s + 
                  " ha caido en la casilla " + @nombre + "\n" +
-                 " Informacion de la casilla: \n" + to_s)
+                 "Informacion de la casilla: \n" + to_s)
         Diario.instance.ocurre_evento(evento)
       end
       
-     def recibe_jugador_calle (i_actual, todos)
+      def recibe_jugador_calle (i_actual, todos)
         if jugador_correcto(i_actual, todos)
           informe(i_actual, todos)
           jugador = todos[i_actual]
@@ -104,7 +107,7 @@ module Civitas
             @titulo_propiedad.tramitar_alquiler(jugador)
           end
         end
-     end
+      end
       
       def recibe_jugador_impuesto (i_actual, todos)
         if jugador_correcto(i_actual, todos)

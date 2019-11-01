@@ -41,7 +41,7 @@ module Civitas
     end
     
     def inhabilitar_carta_especial (sorpresa)
-      if (@sorpresas.delete(sorpresa) != nil)
+      if (!@sorpresas.delete(sorpresa).nil?)
         @cartas_especiales << sorpresa
         Civitas::Diario.instance.ocurre_evento("Carta especial inhabilitada")
       end
@@ -49,7 +49,7 @@ module Civitas
     
     def habilitar_carta_especial (sorpresa)
       pos = @cartas_especiales.index(sorpresa)
-      if pos != nil
+      if !pos.nil?
         @sorpresas << @cartas_especiales.delete_at(pos) #Eliminamos de cartas_especiales y la añadimos a sorpresas
         Civitas::Diario.instance.ocurre_evento("Carta especial habilitada")
       end
