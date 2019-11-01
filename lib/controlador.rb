@@ -29,11 +29,11 @@ module Civitas
           case operacion
 
           when Operaciones_juego::COMPRAR
-            # respuesta = @vista.comprar
+            respuesta = @vista.comprar
             
-            # if respuesta == Respuestas::SI
-            #   @juego.comprar
-            # end
+            if respuesta == Respuestas::SI
+              @juego.comprar
+            end
               @juego.siguiente_paso_completado(operacion)
 
           when Operaciones_juego::GESTIONAR
