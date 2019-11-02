@@ -89,7 +89,7 @@ module Civitas
 
       if(Gestiones_inmobiliarias::LISTA_GESTIONES[@i_gestion] != Gestiones_inmobiliarias::TERMINAR)
         @i_propiedad = menu("¿Sobre qué propiedad quieres hacer la gestión?",
-          @juegoModel.get_jugador_actual.list_propiedades_str)
+          @juegoModel.get_jugador_actual.lista_propiedades)
       end
     end
 

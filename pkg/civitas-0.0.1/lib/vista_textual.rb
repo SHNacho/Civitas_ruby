@@ -87,7 +87,7 @@ module Civitas
                     lista = ["VENDER", "HIPOTECAR", "CANCELAR HIPOTECA",
                           "CONSTRUIR CASA", "CONSTRUIR HOTEL", "TERMINAR"] )
       @i_propiedad = menu("¿Sobre qué propiedad quieres hacer la gestión?",
-                      @juegoModel.get_jugador_actual.list_propiedades_str)
+                      @juegoModel.get_jugador_actual.lista_propiedades)
     end
 
     def getGestion
