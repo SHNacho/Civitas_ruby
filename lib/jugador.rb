@@ -100,6 +100,8 @@ module Civitas
             Diario.instance.ocurre_evento("El jugador " + @nombre + " compra la propiedad " + titulo.to_s)
           end
           @puede_comprar = false
+        else
+          puts "No tienes suficiente dinero para comprar el título"
         end
       end
       
@@ -410,10 +412,14 @@ module Civitas
     def puedo_edificar_casa (propiedad)
       puedo = false
       
-      if (propiedad.num_casas < @@casas_max && 
-          puedo_gastar(propiedad.precio_edificar))
-        
-        puedo = true
+      if propiedad.num_casas < @@casas_max
+        if puedo_gastar(propiedad.precio_edificar)
+          puedo = true
+        else
+          puts "No tienes suficiente dinero"
+        end
+      else
+        puts "Ya has alcanzado el máximo de casas en la propiedad"
       end
       
       return puedo  
@@ -422,11 +428,18 @@ module Civitas
     def puedo_edificar_hotel (propiedad)
       puedo = false
       
-      if (propiedad.num_casas >= @@casas_por_hotel && 
-          propiedad.num_hoteles < @@hoteles_max && 
-          puedo_gastar(propiedad.precio_edificar))
-        
-        puedo = true
+      if propiedad.num_casas >= @@casas_por_hotel
+        if propiedad.num_hoteles < @@hoteles_max
+          if puedo_gastar(propiedad.precio_edificar)
+            puedo = true
+          else
+            puts "No tienes suficiente dinero para construir un hotel"
+          end
+        else
+          puts "No puedes construir mas hoteles"
+        end
+      else
+        puts "No tienes suficientes casas para construir un hotel"
       end
       
       return puedo  
