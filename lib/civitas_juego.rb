@@ -222,7 +222,7 @@ module Civitas
           
           # Añadimos en la posición 10 el parking
           
-          @tablero.añade_casilla(Casilla.new_descanso("Parking"))
+          @tablero.añade_casilla(Casilla.new_descanso("Parking Pedro"))
           
           # Añadimos en la posición 11 la calle 7
           
@@ -253,11 +253,9 @@ module Civitas
           @tablero.añade_casilla(Casilla.new_calle(Titulo_propiedad.new("Calle 11", 350, 0.1, 700, 1400, 1050)))
           
           # Añadimos en la posición 18 la calle 12
-          
           @tablero.añade_casilla(Casilla.new_calle(Titulo_propiedad.new("Calle 12", 300, 0.075, 600, 1200, 900)))
           
           # Añadimos en la posición 19 la sorpresa 3
-          
           @tablero.añade_casilla(Casilla.new_sorpresa(mazo, "Sorpresa3"))
           
           
