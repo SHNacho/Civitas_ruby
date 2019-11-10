@@ -135,8 +135,7 @@ module Civitas
     casilla = tablero.casilla(i)
     puts casilla.nombre
   end
-
-  #TODO varias tiradas de dado y calcular la posición final
+  
   pos_actual = 0
   puts "Estamos en la casilla " + pos_actual.to_s
   for i in (0..3) do
