@@ -71,16 +71,16 @@ module Civitas
       
       def to_s
         str = "-------------------------------------------\n" +
-              "CASILLA: \n" + "Nombre:    " + @nombre + "\n" +
-              "Tipo:    " + @tipo.to_s + "\n"
-        
+              "CASILLA: \n" + "Nombre:            " + @nombre + "\n" +
+                              "Tipo:              " + @tipo.to_s + "\n"
+                              
         case @tipo
         when TipoCasilla::CALLE
-          str+="Precio:     " + @titulo_propiedad.precio_compra.to_s + "\n"
+          str+= "Precio:            " + @titulo_propiedad.precio_compra.to_s + "\n"
         when TipoCasilla::IMPUESTO
-          str+="Importe:    " + @importe.to_s + "\n"
+          str+= "Importe:           " + @importe.to_s + "\n"
         when TipoCasilla::JUEZ
-          str+="Casilla carcel:    " + @@carcel.to_s + "\n"
+          str+= "Casilla carcel:    " + @@carcel.to_s + "\n"
         end
 
         str += "-------------------------------------------\n"
@@ -91,7 +91,7 @@ module Civitas
       private
       
       def informe (i_actual, todos)
-        evento = ("El jugador " + i_actual.to_s + 
+        evento = ("El jugador " + todos[i_actual].nombre + 
                  " ha caido en la casilla " + @nombre + "\n" +
                  "Informacion de la casilla: \n" + to_s)
         Diario.instance.ocurre_evento(evento)

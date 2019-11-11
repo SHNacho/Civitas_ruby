@@ -83,14 +83,28 @@ module Civitas
     end
 
     def gestionar
-      @i_gestion = menu("¿Qué gestión inmoviliaria quieres hacer?",
-                    lista = ["VENDER", "HIPOTECAR", "CANCELAR HIPOTECA",
+      
+      listaPropiedades = @juegoModel.get_jugador_actual.lista_propiedades
+      #Añadimos la opción de volver atrás en el menú de titulo que gestionar
+      listaPropiedades << "Volver atrás" 
+      continuar = false
+      
+      while (!continuar) 
+        @i_gestion = menu("¿Qué gestión inmoviliaria quieres hacer?",
+                          lista = ["VENDER", "HIPOTECAR", "CANCELAR HIPOTECA",
                           "CONSTRUIR CASA", "CONSTRUIR HOTEL", "TERMINAR"] )
 
-      if(Gestiones_inmobiliarias::LISTA_GESTIONES[@i_gestion] != Gestiones_inmobiliarias::TERMINAR)
-        @i_propiedad = menu("¿Sobre qué propiedad quieres hacer la gestión?",
-          @juegoModel.get_jugador_actual.lista_propiedades)
+        if(Gestiones_inmobiliarias::LISTA_GESTIONES[@i_gestion] != Gestiones_inmobiliarias::TERMINAR)
+          opcion = menu("¿Sobre qué propiedad quieres hacer la gestión?",
+                        listaPropiedades)
+          if opcion != (listaPropiedades.length - 1)
+            continuar = true
+          end
+        else
+          continuar = true
+        end
       end
+      @i_propiedad = opcion
     end
 
     def getGestion
