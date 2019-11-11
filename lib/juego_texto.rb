@@ -8,7 +8,7 @@ module Civitas
         nombres = ["Adris", "Jacob", "Julius", "Yop"]
         vista = Vista_textual.new
         juego = CivitasJuego.new(nombres)
-        Dado.instance.set_debug(false)
+        Dado.instance.set_debug(true)
         controlador = Controlador.new(juego, vista)
         controlador.juega
     end
