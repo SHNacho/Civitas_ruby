@@ -35,7 +35,7 @@ module Civitas
 
     def usada
       if @tipo == TipoSorpresa::SALIRCARCEL
-        @mazo.inhabilitar_carta_especial(self)
+        @mazo.habilitar_carta_especial(self)
       end
     end
 
