@@ -1,4 +1,4 @@
-#enconding:UTF-8
+#encoding:UTF-8
 
 require_relative 'enum.rb'
 
