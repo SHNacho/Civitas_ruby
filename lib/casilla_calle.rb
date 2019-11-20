@@ -4,8 +4,10 @@ require_relative 'casilla.rb'
 module Civitas
     class Casilla_calle < Casilla
 
-        def initialize(nombre, titulo_propiedad)
-            super(nombre)
+        attr_reader :titulo_propiedad
+
+        def initialize(titulo_propiedad)
+            super(titulo_propiedad.nombre)
             @titulo_propiedad = titulo_propiedad
         end
 

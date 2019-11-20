@@ -14,7 +14,7 @@ module Civitas
         @num_casilla_carcel = 1
       end
       @casillas = []
-      @casillas[0] = Casilla.new_descanso("Salida")
+      @casillas[0] = Casilla.new("Salida")
       @por_salida = 0
       @tiene_juez = false
     end
@@ -36,17 +36,17 @@ module Civitas
     
     def añade_casilla(casilla) 
       if @casillas.size == @num_casilla_carcel
-        @casillas.push(Casilla.new_descanso("Cárcel"))
+        @casillas.push(Casilla.new("Cárcel"))
       end
       @casillas.push(casilla)
       if @casillas.size == @num_casilla_carcel
-        @casillas.push(Casilla.new_descanso("Cárcel"))
+        @casillas.push(Casilla.new("Cárcel"))
       end
     end
     
     def añade_juez
       if !@tiene_juez
-        self.añade_casilla(Casilla.new_juez(@num_casilla_carcel ,"Juez"))
+        self.añade_casilla(Casilla_juez.new(@num_casilla_carcel ,"Juez"))
         @tiene_juez = true
       end
     end

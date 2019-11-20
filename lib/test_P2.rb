@@ -21,9 +21,9 @@ module Civitas
 
   tablero.añade_juez
 
-  tablero.añade_casilla(Casilla.new_descanso("Descanso"))
-  tablero.añade_casilla(Casilla.new_impuesto(200, "Impuesto"))
-  tablero.añade_casilla(Casilla.new_sorpresa(mazo, "Sorpresa"))
+  tablero.añade_casilla(Casilla.new("Descanso"))
+  tablero.añade_casilla(Casilla_impuesto.new(200, "Impuesto"))
+  tablero.añade_casilla(Casilla_sorpresa.new(mazo, "Sorpresa"))
 
   mazo.al_mazo(Sorpresa.new_ircarcel(TipoSorpresa::IRCARCEL, tablero))
   mazo.al_mazo(Sorpresa.new_ircasilla(TipoSorpresa::IRCASILLA, tablero, 5, "Ir a casilla 5"))
@@ -31,11 +31,11 @@ module Civitas
 
   titulo = Titulo_propiedad.new("titulo", 10, 10, 10, 10, 10)
 
-  casilla1 = Casilla.new_descanso("Descanso")
-  casilla2 = Casilla.new_calle(titulo)
-  casilla3 = Casilla.new_impuesto(100, "Impuesto")
-  casilla4 = Casilla.new_juez(4, "Juez")
-  casilla5 = Casilla.new_sorpresa(mazo, "Sorpresa")
+  casilla1 = Casilla.new("Descanso")
+  casilla2 = Casilla_calle.new(titulo)
+  casilla3 = Casilla_impuesto.new(100, "Impuesto")
+  casilla4 = Casilla_juez.new(4, "Juez")
+  casilla5 = Casilla_sorpresa.new(mazo, "Sorpresa")
 
 
   puts casilla3.to_s

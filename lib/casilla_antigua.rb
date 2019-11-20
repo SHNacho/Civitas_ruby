@@ -20,7 +20,7 @@ module Civitas
       @tipo = tipo
     end
     
-    def self.new_descanso(nombre)
+    def self.new(nombre)
       new(nombre, nil, 0, @@carcel, nil, TipoCasilla::DESCANSO, nil)
     end
     

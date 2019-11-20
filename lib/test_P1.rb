@@ -120,11 +120,11 @@ module Civitas
   tablero = Tablero.new(3)
   tablero.añade_juez()
 
-  casilla = Casilla.new_descanso("cas")
-  casilla1 = Casilla.new_descanso("Primera")
-  casilla2 = Casilla.new_descanso("Segunda")
-  casilla3 = Casilla.new_descanso("Tercera")
-  casilla4 = Casilla.new_descanso("Cuarta")
+  casilla = Casilla.new("cas")
+  casilla1 = Casilla.new("Primera")
+  casilla2 = Casilla.new("Segunda")
+  casilla3 = Casilla.new("Tercera")
+  casilla4 = Casilla.new("Cuarta")
 
   tablero.añade_casilla(casilla1)
   tablero.añade_casilla(casilla2)
