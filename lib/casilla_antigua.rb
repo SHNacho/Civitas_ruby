@@ -12,7 +12,11 @@ module Civitas
   
     def initialize (nombre, titulo, cantidad, num_casilla_carcel, mazo, tipo, sorpresa)
       @nombre = nombre
+      @importe = cantidad
+      @titulo_propiedad = titulo
       @@carcel = num_casilla_carcel
+      @mazo = mazo
+      @sorpresa = sorpresa
       @tipo = tipo
     end
     
