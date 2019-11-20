@@ -1,6 +1,6 @@
 #encoding:UTF-8
 
-require_relative 'enum.rb'
+require_relative 'casilla.rb'
 
 module Civitas
   class Casilla
