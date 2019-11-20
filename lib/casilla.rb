@@ -4,9 +4,6 @@ require_relative 'enum.rb'
 
 module Civitas
   class Casilla
-      
-    @@carcel = 0
-
     attr_reader :nombre
   
     def initialize (nombre)
@@ -48,5 +45,5 @@ module Civitas
     end
 
   end
-  
+
 end
