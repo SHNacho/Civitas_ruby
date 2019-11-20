@@ -4,9 +4,6 @@ require_relative 'casilla.rb'
 
 module Civitas
   class Casilla
-      
-    @@carcel = 0
-
     attr_reader :nombre
   
     def initialize (nombre)
