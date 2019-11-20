@@ -5,7 +5,7 @@ module Civitas
         def initialize(mazo, nombre)
             super(nombre)
             @mazo = mazo
-            @sorpresa = sorpresa.siguiente
+            @sorpresa = mazo.siguiente
         end
 
         def recibe_jugador

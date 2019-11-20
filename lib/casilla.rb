@@ -29,7 +29,7 @@ module Civitas
     def to_s
       str = "-------------------------------------------\n" +
             "CASILLA: \n" + "Nombre:            " + @nombre + "\n" +
-                            "Tipo:              " + "Descanso" + "\n"+
+                            "Tipo:              " + "Descanso" + "\n"
       str += "-------------------------------------------\n"
       
       return str
