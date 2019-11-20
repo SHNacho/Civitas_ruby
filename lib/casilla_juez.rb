@@ -6,7 +6,7 @@ class Casilla_juez < Casilla
   
   @@carcel = 0
   
-  def initialize(nombre, num_casilla_carcel)
+  def initialize(num_casilla_carcel, nombre)
     super (nombre)
     @@carcel = num_casilla_carcel
   end

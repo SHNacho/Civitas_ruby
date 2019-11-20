@@ -5,7 +5,7 @@
 require_relative 'casilla.rb'
 
 class Casilla_impuesto < Casilla
-  def initialize (nombre, cantidad)
+  def initialize (cantidad, nombre)
     super(nombre)
     @importe = cantidad   
   end
