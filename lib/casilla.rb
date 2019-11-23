@@ -31,7 +31,6 @@ module Civitas
             "CASILLA: \n" + "Nombre:            " + @nombre + "\n" +
                             "Tipo:              " + "Descanso" + "\n"
       str += "-------------------------------------------\n"
-      
       return str
     end
     
