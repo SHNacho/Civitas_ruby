@@ -17,7 +17,7 @@ module Civitas
       if(jugador_correcto(actual, todos))
         informe(actual, todos)
         texto = "pagar a " + todos[actual].nombre + " " + @valor.to_s
-        sorpresa_pagan = Sorpresa.new_sorpresa(TipoSorpresa::PAGARCOBRAR, @valor*(-1), texto)
+        sorpresa_pagan = Sorpresa_pagarcobrar.new( @valor*(-1), texto)
         
         for i in 0..todos.size do
           if i != actual
@@ -26,7 +26,7 @@ module Civitas
         end
 
         texto = "Recibe " + @valor.to_s + " de cada jugador"
-        sorpresa_recibe = Sorpresa.new_sorpresa(TipoSorpresa::PAGARCOBRAR, @valor*(todos.size - 1), texto)
+        sorpresa_recibe = Sorpresa_pagarcobrar.new(@valor*(todos.size - 1), texto)
 
         sorpresa_recibe.aplicar_a_jugador(actual, todos)
       end
