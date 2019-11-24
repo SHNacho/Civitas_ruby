@@ -6,8 +6,12 @@ module Civitas
     class SorpresaConvertirJugador < Sorpresa
 
         def initialize(valor, texto)
+            super(texto)
             @valor = valor
-            @texto = texto
+        end
+
+        def to_s
+            str = "'Sorpresa convertir jugador: " + @texto + "'"
         end
 
         def aplicar_a_jugador(actual,todos)
@@ -18,6 +22,8 @@ module Civitas
                 todos[actual] = JugadorEspeculador.nuevo_especulador(todos[actual], @valor)
             end
         end
+
+        public_class_method :new
 
     end
 
