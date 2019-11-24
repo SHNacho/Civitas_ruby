@@ -1,7 +1,7 @@
 require_relative 'jugador.rb'
 
 module Civitas
-    class Jugador_especualdor < Jugador
+    class JugadorEspecualdor < Jugador
         @@factor_especulador = 2
 
         def initialize(nombre, fianza)
