@@ -9,7 +9,12 @@ require_relative 'casilla_calle.rb'
 require_relative 'casilla_impuesto.rb'
 require_relative 'casilla_sorpresa.rb'
 require_relative 'casilla_juez.rb'
-require_relative 'sorpresa.rb'
+require_relative 'sorpresa_ircarcel.rb'
+require_relative 'sorpresa_ircasilla.rb'
+require_relative 'sorpresa_salircarcel.rb'
+require_relative 'sorpresa_porjugador.rb'
+require_relative 'sorpresa_porcasahotel.rb'
+require_relative 'sorpresa_pagarcobrar.rb'
 require_relative 'dado.rb'
 require_relative 'titulo_propiedad.rb'
 
@@ -170,21 +175,16 @@ module Civitas
         end
 
         def inicializar_mazo_sorpresas(tablero)
-            @mazo.al_mazo(Sorpresa.new_ircarcel(TipoSorpresa::IRCARCEL, tablero))
-            @mazo.al_mazo(Sorpresa.new_ircasilla(TipoSorpresa::IRCASILLA, tablero,
-                                                 3, "Ve a la casilla 3"))
-            @mazo.al_mazo(Sorpresa.new_ircasilla(TipoSorpresa::IRCASILLA, tablero,
-                                                 14, "Ve a la casilla 14"))
-            @mazo.al_mazo(Sorpresa.new_sorpresa(TipoSorpresa::PORCASAHOTEL, 50,
-                                                "Cobra 50 por cada propiedad"))
-            @mazo.al_mazo(Sorpresa.new_sorpresa(TipoSorpresa::PAGARCOBRAR, 200, "Cobra 200"))
-            @mazo.al_mazo(Sorpresa.new_sorpresa(TipoSorpresa::PAGARCOBRAR, -200, "Paga 200"))
-            @mazo.al_mazo(Sorpresa.new_sorpresa(TipoSorpresa::PORCASAHOTEL, -50, 
-                                                "Paga 50 por cada propiedad"))
-            @mazo.al_mazo(Sorpresa.new_salircarcel(TipoSorpresa::SALIRCARCEL, @mazo))
-            @mazo.al_mazo(Sorpresa.new_sorpresa(TipoSorpresa::PORJUGADOR, 50, "Recibe 50 de cada jugador"))
-            @mazo.al_mazo(Sorpresa.new_sorpresa(TipoSorpresa::PORJUGADOR, -50, "Paga 50 a cada jugador"))
-            
+            @mazo.al_mazo(Sorpresa_ircarcel.new(tablero))
+            @mazo.al_mazo(Sorpresa_ircasilla.new(tablero, 3, "Ve a la casilla 3"))
+            @mazo.al_mazo(Sorpresa_ircasilla.new(tablero, 14, "Ve a la casilla 14"))
+            @mazo.al_mazo(Sorpresa_porcasahotel.new(50, "Cobra 50 por cada propiedad"))
+            @mazo.al_mazo(Sorpresa_pagarcobrar.new(200, "Cobra 200"))
+            @mazo.al_mazo(Sorpresa_pagarcobrar.new( -200, "Paga 200"))
+            @mazo.al_mazo(Sorpresa_porcasahotel.new(-50, "Paga 50 por cada propiedad"))
+            @mazo.al_mazo(Sorpresa_salircarcel.new(@mazo))
+            @mazo.al_mazo(Sorpresa_porjugador.new( 50, "Recibe 50 de cada jugador"))
+            @mazo.al_mazo(Sorpresa_porjugador.new(-50, "Paga 50 a cada jugador"))
         end
 
         def inicializar_tablero(mazo)
