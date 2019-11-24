@@ -36,7 +36,7 @@ module Civitas
                             "Puede comprar    " + puede_comprar_str + "\n"
                             "-------------------------------------------\n"
 
-        return str
+            return str
         end
 
     end
