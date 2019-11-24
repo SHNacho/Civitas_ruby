@@ -336,13 +336,14 @@ module Civitas
         puede_comprar_str = @puede_comprar ? "Sí" : "No"
         str =        "-------------------------------------------\n" +
                      "JUGADOR \n" +
-                     "Nombre:         " + @nombre + "\n" + 
-                     "Saldo:          " + @saldo.to_s + "\n" +
-                     "Casilla actual: " + @num_casilla_actual.to_s + "\n" +
-                     "Encarcelado:    " + encarcelado_str + "\n" +
-                     "Salvoconducto:  " + salvoconducto_str + "\n" +
-                     "Propiedades:    " + propiedades_str + "\n" +
-                     "Puede comprar   " + puede_comprar_str + "\n"
+                     "Tipo de jugador: Normal \n" +
+                     "Nombre:          " + @nombre + "\n" + 
+                     "Saldo:           " + @saldo.to_s + "\n" +
+                     "Casilla actual:  " + @num_casilla_actual.to_s + "\n" +
+                     "Encarcelado:     " + encarcelado_str + "\n" +
+                     "Salvoconducto:   " + salvoconducto_str + "\n" +
+                     "Propiedades:     " + propiedades_str + "\n" +
+                     "Puede comprar    " + puede_comprar_str + "\n"
                      "-------------------------------------------\n"
 
         return str
