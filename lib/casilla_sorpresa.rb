@@ -8,7 +8,7 @@ module Civitas
             @sorpresa = mazo.siguiente
         end
 
-        def recibe_jugador
+        def recibe_jugador(i_actual, topdos)
             if jugador_correcto(i_actual, todos)
                 @sorpresa = @mazo.siguiente
                 informe(i_actual,todos)
