@@ -39,5 +39,31 @@ module Civitas
             return str
         end
 
+        def casas_max
+            return casas_max*@@factor_especulador
+        end
+
+        def hoteles_max
+            return hoteles_max*@@factor_especulador
+        end
+
+        def encarcelar (num_casilla_carcel)
+            if debe_ser_encarcelado
+                if saldo < @fianza
+                    mover_a_casilla(num_casilla_carcel)
+                    @encarcelado = true
+                    Diario.instance.ocurre_evento("Ha sido encarcelado " + nombre)
+                else
+                    paga(@fianza)
+                end
+            end
+
+            return(@encarcelado)
+        end
+
+        def paga_impuesto(cantidad)
+            super(cantidad/@@factor_especulador)
+        end
+
     end
 end
