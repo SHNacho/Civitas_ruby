@@ -5,15 +5,14 @@
             <url>lib/casilla.rb</url>
             <bookmark id="1">
                 <name/>
-                <line>98</line>
+                <line>49</line>
                 <key/>
             </bookmark>
         </file>
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/Users/juliocamposrodriguez/Desktop/PracticaPDOO/Civitas_ruby/lib/civitas_juego.rb</file>
-            <file>file:/Users/juliocamposrodriguez/Desktop/PracticaPDOO/Civitas_ruby/lib/gestor_estados.rb</file>
+            <file>file:/Users/juliocamposrodriguez/Desktop/PracticaPDOO/Civitas_ruby/lib/sorpresa.rb</file>
         </group>
     </open-files>
 </project-private>
