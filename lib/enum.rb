@@ -1,14 +1,4 @@
-module Civitas
-      
-    module TipoSorpresa
-        IRCARCEL     = :ircarcel
-        IRCASILLA    = :ircasilla
-        PAGARCOBRAR  = :pagarcobrar
-        PORCASAHOTEL = :pocashotel
-        PORJUGADOR   = :porjugador
-        SALIRCARCEL  = :salircarcel
-    end
-      
+module Civitas    
     module Estados_juego
         INICIO_TURNO      = :inicio_turno
         DESPUES_CARCEL    = :despues_carcel
