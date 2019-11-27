@@ -1,18 +1,25 @@
 require_relative 'jugador.rb'
 
-module Civitas
-    class JugadorEspecualdor < Jugador
-        @@factor_especulador = 2
+require_relative 'titulo_propiedad.rb'
 
-        def initialize(nombre, fianza)
+module Civitas
+
+    class JugadorEspecualdor < Jugador
+
+        @@factor_especulador = 2
+        @casas_max = Jugador.casas_max * @@factor_especulador
+        @hoteles_max = Jugador.hoteles_max * @@factor_especulador
+
+        def initialize(jugador, fianza)
+            super(nil, jugador)
             @fianza = fianza
-            new_copy(nombre)
         end
 
         def self.nuevo_especulador(jugador, fianza)
-            jugador_especulador = Jugador.new(jugador, fianza)
+            jugador_especulador = new(jugador, fianza)
+
             for propiedad in jugador.propiedades
-                propiedad.actualizar_propietario_por_conversion(jugador_especulador)
+                propiedad.actualiza_propietario_por_conversion(jugador_especulador)
             end
             return jugador_especulador
         end
@@ -39,12 +46,12 @@ module Civitas
             return str
         end
 
-        def casas_max
-            return casas_max*@@factor_especulador
+        def self.casas_max
+            return @casas_max
         end
 
-        def hoteles_max
-            return hoteles_max*@@factor_especulador
+        def self.hoteles_max
+            return @hoteles_max
         end
 
         def encarcelar (num_casilla_carcel)
@@ -64,6 +71,6 @@ module Civitas
         def paga_impuesto(cantidad)
             super(cantidad/@@factor_especulador)
         end
-
+        
     end
 end

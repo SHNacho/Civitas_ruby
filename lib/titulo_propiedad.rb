@@ -30,7 +30,7 @@ module Civitas
     public
 
     def actualiza_propietario_por_conversion (jugador)
-      propietario = jugador
+      @propietario = jugador
     end
 
     def cancelar_hipoteca (jugador)

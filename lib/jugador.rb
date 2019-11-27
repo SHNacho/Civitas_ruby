@@ -7,9 +7,9 @@ module Civitas
     
     include Comparable
     
-    @@casas_max       = 4
+    @casas_max        = 4
+    @hoteles_max      = 4
     @@casas_por_hotel = 4
-    @@hoteles_max     = 4
     @@paso_por_salida = 1000
     @@precio_libertad = 200
     @@saldo_inicial   = 7500
@@ -19,6 +19,9 @@ module Civitas
     attr_reader :num_casilla_actual
     attr_reader :puede_comprar
     attr_reader :encarcelado
+    attr_reader :salvoconducto
+    attr_reader :nombre
+    attr_reader :propiedades
     
     
     def initialize (nombre, otro=nil)
@@ -45,7 +48,7 @@ module Civitas
       new(nombre)
     end
 
-    def self.new_copy(otro)
+    def self.copia(otro)
       new(nil, otro)
     end
     
@@ -360,9 +363,6 @@ module Civitas
     end
     
     private
-
-    attr_reader :casas_max
-    attr_reader :hoteles_max
     attr_reader :precio_libertad
     attr_reader :paso_por_salida
 
@@ -411,7 +411,7 @@ module Civitas
     def puedo_edificar_casa (propiedad)
       puedo = false
       
-      if propiedad.num_casas < @@casas_max
+      if propiedad.num_casas < casas_max
         if puedo_gastar(propiedad.precio_edificar)
           puedo = true
         else
@@ -428,7 +428,7 @@ module Civitas
       puedo = false
       
       if propiedad.num_casas >= @@casas_por_hotel
-        if propiedad.num_hoteles < @@hoteles_max
+        if propiedad.num_hoteles < hoteles_max
           if puedo_gastar(propiedad.precio_edificar)
             puedo = true
           else
@@ -454,10 +454,16 @@ module Civitas
       return puedo
     end
 
-    public
-    attr_reader :propiedades
+    protected
     attr_reader :saldo
-    attr_reader :nombre
+    
+    def self.casas_max 
+      return @casas_max
+    end
+
+    def self.hoteles_max
+      return @hoteles_max
+    end
 
     end
   end
