@@ -176,16 +176,16 @@ module Civitas
         end
 
         def inicializar_mazo_sorpresas(tablero)
-            # @mazo.al_mazo(Sorpresa_ircarcel.new(tablero))
-            # @mazo.al_mazo(Sorpresa_ircasilla.new(tablero, 3, "Ve a la casilla 3"))
-            # @mazo.al_mazo(Sorpresa_ircasilla.new(tablero, 14, "Ve a la casilla 14"))
-            # @mazo.al_mazo(Sorpresa_porcasahotel.new(50, "Cobra 50 por cada propiedad"))
-            # @mazo.al_mazo(Sorpresa_pagarcobrar.new(200, "Cobra 200"))
-            # @mazo.al_mazo(Sorpresa_pagarcobrar.new( -200, "Paga 200"))
-            # @mazo.al_mazo(Sorpresa_porcasahotel.new(-50, "Paga 50 por cada propiedad"))
-            # @mazo.al_mazo(Sorpresa_salircarcel.new(@mazo))
-            # @mazo.al_mazo(Sorpresa_porjugador.new( 50, "Recibe 50 de cada jugador"))
-            # @mazo.al_mazo(Sorpresa_porjugador.new(-50, "Paga 50 a cada jugador"))
+            @mazo.al_mazo(Sorpresa_ircarcel.new(tablero))
+            @mazo.al_mazo(Sorpresa_ircasilla.new(tablero, 3, "Ve a la casilla 3"))
+            @mazo.al_mazo(Sorpresa_ircasilla.new(tablero, 14, "Ve a la casilla 14"))
+            @mazo.al_mazo(Sorpresa_porcasahotel.new(50, "Cobra 50 por cada propiedad"))
+            @mazo.al_mazo(Sorpresa_pagarcobrar.new(200, "Cobra 200"))
+            @mazo.al_mazo(Sorpresa_pagarcobrar.new( -200, "Paga 200"))
+            @mazo.al_mazo(Sorpresa_porcasahotel.new(-50, "Paga 50 por cada propiedad"))
+            @mazo.al_mazo(Sorpresa_salircarcel.new(@mazo))
+            @mazo.al_mazo(Sorpresa_porjugador.new( 50, "Recibe 50 de cada jugador"))
+            @mazo.al_mazo(Sorpresa_porjugador.new(-50, "Paga 50 a cada jugador"))
             @mazo.al_mazo(SorpresaConvertirJugador.new(200, "Te conviertes en jugador especulador"))
         end
 
