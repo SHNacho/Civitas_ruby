@@ -15,6 +15,7 @@ require_relative 'sorpresa_salircarcel.rb'
 require_relative 'sorpresa_porjugador.rb'
 require_relative 'sorpresa_porcasahotel.rb'
 require_relative 'sorpresa_pagarcobrar.rb'
+require_relative 'sorpresa_convertir_jugador.rb'
 require_relative 'dado.rb'
 require_relative 'titulo_propiedad.rb'
 
@@ -175,20 +176,22 @@ module Civitas
         end
 
         def inicializar_mazo_sorpresas(tablero)
-            @mazo.al_mazo(Sorpresa_ircarcel.new(tablero))
-            @mazo.al_mazo(Sorpresa_ircasilla.new(tablero, 3, "Ve a la casilla 3"))
-            @mazo.al_mazo(Sorpresa_ircasilla.new(tablero, 14, "Ve a la casilla 14"))
-            @mazo.al_mazo(Sorpresa_porcasahotel.new(50, "Cobra 50 por cada propiedad"))
-            @mazo.al_mazo(Sorpresa_pagarcobrar.new(200, "Cobra 200"))
-            @mazo.al_mazo(Sorpresa_pagarcobrar.new( -200, "Paga 200"))
-            @mazo.al_mazo(Sorpresa_porcasahotel.new(-50, "Paga 50 por cada propiedad"))
-            @mazo.al_mazo(Sorpresa_salircarcel.new(@mazo))
-            @mazo.al_mazo(Sorpresa_porjugador.new( 50, "Recibe 50 de cada jugador"))
-            @mazo.al_mazo(Sorpresa_porjugador.new(-50, "Paga 50 a cada jugador"))
+            # @mazo.al_mazo(Sorpresa_ircarcel.new(tablero))
+            # @mazo.al_mazo(Sorpresa_ircasilla.new(tablero, 3, "Ve a la casilla 3"))
+            # @mazo.al_mazo(Sorpresa_ircasilla.new(tablero, 14, "Ve a la casilla 14"))
+            # @mazo.al_mazo(Sorpresa_porcasahotel.new(50, "Cobra 50 por cada propiedad"))
+            # @mazo.al_mazo(Sorpresa_pagarcobrar.new(200, "Cobra 200"))
+            # @mazo.al_mazo(Sorpresa_pagarcobrar.new( -200, "Paga 200"))
+            # @mazo.al_mazo(Sorpresa_porcasahotel.new(-50, "Paga 50 por cada propiedad"))
+            # @mazo.al_mazo(Sorpresa_salircarcel.new(@mazo))
+            # @mazo.al_mazo(Sorpresa_porjugador.new( 50, "Recibe 50 de cada jugador"))
+            # @mazo.al_mazo(Sorpresa_porjugador.new(-50, "Paga 50 a cada jugador"))
+            @mazo.al_mazo(SorpresaConvertirJugador.new(200, "Te conviertes en jugador especulador"))
         end
 
         def inicializar_tablero(mazo)
           # Salida ya se añade en la posición 0
+          @tablero.añade_casilla(Casilla_sorpresa.new(mazo, "Sorpresa 1"))
           
           # Añadimos en la posición 1 la calle 1
           
