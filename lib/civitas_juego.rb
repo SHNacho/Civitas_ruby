@@ -177,21 +177,20 @@ module Civitas
 
         def inicializar_mazo_sorpresas(tablero)
             @mazo.al_mazo(SorpresaConvertirJugador.new(200, "Te conviertes en jugador especulador"))
-            # @mazo.al_mazo(SorpresaIrCarcel.new(tablero))
-            # @mazo.al_mazo(SorpresaIrCasilla.new(tablero, 3, "Ve a la casilla 3"))
-            # @mazo.al_mazo(SorpresaIrCasilla.new(tablero, 14, "Ve a la casilla 14"))
-            # @mazo.al_mazo(SorpresaPorCasaHotel.new(50, "Cobra 50 por cada propiedad"))
-            # @mazo.al_mazo(SorpresaPagarCobrar.new(200, "Cobra 200"))
-            # @mazo.al_mazo(SorpresaPagarCobrar.new( -200, "Paga 200"))
-            # @mazo.al_mazo(SorpresaPorCasaHotel.new(-50, "Paga 50 por cada propiedad"))
-            # @mazo.al_mazo(SorpresaSalirCarcel.new(@mazo))
-            # @mazo.al_mazo(SorpresaPorJugador.new( 50, "Recibe 50 de cada jugador"))
-            # @mazo.al_mazo(SorpresaPorJugador.new(-50, "Paga 50 a cada jugador"))
+            @mazo.al_mazo(SorpresaIrCarcel.new(tablero))
+            @mazo.al_mazo(SorpresaIrCasilla.new(tablero, 3, "Ve a la casilla 3"))
+            @mazo.al_mazo(SorpresaIrCasilla.new(tablero, 14, "Ve a la casilla 14"))
+            @mazo.al_mazo(SorpresaPorCasaHotel.new(50, "Cobra 50 por cada propiedad"))
+            @mazo.al_mazo(SorpresaPagarCobrar.new(200, "Cobra 200"))
+            @mazo.al_mazo(SorpresaPagarCobrar.new( -200, "Paga 200"))
+            @mazo.al_mazo(SorpresaPorCasaHotel.new(-50, "Paga 50 por cada propiedad"))
+            @mazo.al_mazo(SorpresaSalirCarcel.new(@mazo))
+            @mazo.al_mazo(SorpresaPorJugador.new( 50, "Recibe 50 de cada jugador"))
+            @mazo.al_mazo(SorpresaPorJugador.new(-50, "Paga 50 a cada jugador"))
         end
 
         def inicializar_tablero(mazo)
           # Salida ya se añade en la posición 0
-          @tablero.añade_casilla(CasillaSorpresa.new(mazo, "Sorpresa 1"))
           # Añadimos en la posición 1 la calle 1
           @tablero.añade_casilla(CasillaCalle.new(TituloPropiedad.new("Calle 1", 100, 0.05, 200, 400, 300)))
           # Añadimos en la posición 2 la casilla impuesto
@@ -204,7 +203,7 @@ module Civitas
           # Añadimos en la posición 6 la calle 4
           @tablero.añade_casilla(CasillaCalle.new(TituloPropiedad.new("Calle 4", 300, 0.075, 600, 1200, 900)))
           # Añadimos en la posición 7 la sorpresa 1
-          
+          @tablero.añade_casilla(CasillaSorpresa.new(mazo, "Sorpresa 1"))
           # Añadimos en la posición 8 la calle 5
           @tablero.añade_casilla(CasillaCalle.new(TituloPropiedad.new("Calle 5", 125, 0.05, 250, 500, 375)))
           # Añadimos en la posición 9 la calle 6
