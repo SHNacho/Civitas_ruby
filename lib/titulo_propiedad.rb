@@ -2,7 +2,7 @@
 
 module Civitas
 
-  class Titulo_propiedad
+  class TituloPropiedad
 
     @@factor_intereses_hipoteca = 1.1
     

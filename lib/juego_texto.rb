@@ -6,7 +6,7 @@ require_relative 'dado.rb'
 module Civitas
     class JuegoTexto
         nombres = ["Adris", "Jacob", "Julius", "Yop"]
-        vista = Vista_textual.new
+        vista = VistaTextual.new
         juego = CivitasJuego.new(nombres)
         Dado.instance.set_debug(true)
         controlador = Controlador.new(juego, vista)

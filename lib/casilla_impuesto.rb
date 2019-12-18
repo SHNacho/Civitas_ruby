@@ -1,7 +1,7 @@
 require_relative 'casilla.rb'
 
 module Civitas
-  class Casilla_impuesto < Casilla
+  class CasillaImpuesto < Casilla
 
     def initialize (cantidad, nombre)
       super(nombre)

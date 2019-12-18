@@ -1,7 +1,7 @@
 require_relative 'sorpresa.rb'
 
 module Civitas
-  class Sorpresa_pagarcobrar < Sorpresa
+  class SorpresaPagarCobrar < Sorpresa
     
     def initialize (valor, texto)
       super(texto)

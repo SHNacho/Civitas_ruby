@@ -5,7 +5,7 @@
 require_relative 'enum.rb'
 
 module Civitas
-  class Operacion_inmobiliaria
+  class OperacionInmobiliaria
     def initialize (gest, ip)
       @gestion = gest
       @num_propiedad = ip

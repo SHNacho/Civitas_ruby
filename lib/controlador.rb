@@ -42,7 +42,7 @@ module Civitas
             gestion = @vista.getGestion
             propiedad = @vista.getPropiedad
             
-            operacion_inm = Operacion_inmobiliaria.new(Gestiones_inmobiliarias::LISTA_GESTIONES[gestion],
+            operacion_inm = OperacionInmobiliaria.new(Gestiones_inmobiliarias::LISTA_GESTIONES[gestion],
                                                        propiedad)
             
             case operacion_inm.gestion

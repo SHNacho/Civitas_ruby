@@ -1,7 +1,7 @@
 require_relative 'casilla.rb'
 
 module Civitas
-  class Casilla_juez < Casilla
+  class CasillaJuez < Casilla
     
     @@carcel = 0
     

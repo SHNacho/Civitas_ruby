@@ -2,7 +2,7 @@ require_relative 'sorpresa.rb'
 require_relative 'tablero.rb'
 
 module Civitas
-  class Sorpresa_ircarcel < Sorpresa
+  class SorpresaIrCarcel < Sorpresa
     
     def initialize (tablero)
       super("Ve a la carcel directamente")

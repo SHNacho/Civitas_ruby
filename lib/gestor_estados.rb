@@ -2,7 +2,7 @@ require_relative 'diario.rb'
 require_relative 'enum.rb'
 
 module Civitas
-  class Gestor_estados
+  class GestorEstados
     
     def estado_inicial
       return (Estados_juego::INICIO_TURNO)

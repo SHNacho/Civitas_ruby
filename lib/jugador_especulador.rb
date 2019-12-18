@@ -4,7 +4,7 @@ require_relative 'titulo_propiedad.rb'
 
 module Civitas
 
-    class JugadorEspecualdor < Jugador
+    class JugadorEspeculador < Jugador
 
         @@factor_especulador = 2
         @casas_max = Jugador.casas_max * @@factor_especulador
@@ -71,6 +71,7 @@ module Civitas
         def paga_impuesto(cantidad)
             super(cantidad/@@factor_especulador)
         end
-        
     end
+
+    
 end

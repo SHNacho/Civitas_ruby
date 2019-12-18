@@ -1,7 +1,7 @@
 require_relative 'casilla.rb'
 
 module Civitas
-    class Casilla_sorpresa < Casilla
+    class CasillaSorpresa < Casilla
         def initialize(mazo, nombre)
             super(nombre)
             @mazo = mazo

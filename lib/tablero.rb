@@ -46,7 +46,7 @@ module Civitas
     
     def añade_juez
       if !@tiene_juez
-        self.añade_casilla(Casilla_juez.new(@num_casilla_carcel ,"Juez"))
+        self.añade_casilla(CasillaJuez.new(@num_casilla_carcel ,"Juez"))
         @tiene_juez = true
       end
     end

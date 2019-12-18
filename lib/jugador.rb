@@ -14,7 +14,6 @@ module Civitas
     @@precio_libertad = 200
     @@saldo_inicial   = 7500
     
-    
     attr_reader :casas_por_hotel
     attr_reader :num_casilla_actual
     attr_reader :puede_comprar
@@ -411,7 +410,7 @@ module Civitas
     def puedo_edificar_casa (propiedad)
       puedo = false
       
-      if propiedad.num_casas < casas_max
+      if propiedad.num_casas < self.class.casas_max
         if puedo_gastar(propiedad.precio_edificar)
           puedo = true
         else
@@ -428,7 +427,7 @@ module Civitas
       puedo = false
       
       if propiedad.num_casas >= @@casas_por_hotel
-        if propiedad.num_hoteles < hoteles_max
+        if propiedad.num_hoteles < self.class.hoteles_max
           if puedo_gastar(propiedad.precio_edificar)
             puedo = true
           else

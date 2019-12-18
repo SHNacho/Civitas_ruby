@@ -2,7 +2,7 @@ require_relative 'sorpresa.rb'
 require_relative 'tablero.rb'
 
 module Civitas
-  class Sorpresa_salircarcel < Sorpresa
+  class SorpresaSalirCarcel < Sorpresa
     
     def initialize (mazo)
       super("Esta carta te permite salir de la carcel")

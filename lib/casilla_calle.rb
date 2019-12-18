@@ -2,7 +2,7 @@ require_relative 'titulo_propiedad.rb'
 require_relative 'casilla.rb'
 
 module Civitas
-    class Casilla_calle < Casilla
+    class CasillaCalle < Casilla
 
         attr_reader :titulo_propiedad
 

@@ -6,7 +6,7 @@ require 'io/console'
 
 module Civitas
 
-  class Vista_textual
+  class VistaTextual
 
     def initialize
       @i_propiedad = nil
